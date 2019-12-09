@@ -1,13 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span></span>
+    <span>{{ title }}</span>
     <span class="example-spacer"></span>
-    <button mat-raised-button>
-      <a routerLink="/dashboard">Dashboard</a>
-    </button>
-    <button mat-raised-button>
-      <a routerLink="/heroes">Heroes</a>
-    </button>
+    <form [formGroup]="form">
+      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+    </form>
   </mat-toolbar-row>
 </mat-toolbar>
 

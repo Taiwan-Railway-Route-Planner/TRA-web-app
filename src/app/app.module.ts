@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ReactiveFormsModule} from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 
 // import ngx-translate and the http loader
@@ -20,6 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule,
+
     // ngx-translate and the loader module
     HttpClientModule,
     TranslateModule.forRoot({
@@ -28,8 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
-    BrowserAnimationsModule
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
