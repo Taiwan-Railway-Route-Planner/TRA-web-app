@@ -34,7 +34,7 @@ export class RequestService {
   }
 
   getStation(): Observable<any> {
-    return this.getRequest(this.url.station, 'getStation')
+    return this.getRequest(this.url.station, 'getStation');
   }
 
   getTheRoute(travel: any): Observable<any> {
