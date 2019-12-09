@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "Geen route mogelijk voor die dag!",
+		"stations": "Gelieve later nog eens te proberen!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "E-ticket",
+				"single": "Enkel Ticket"
+			},
+			"top": {
+				"title": "Reisgegevens"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "Nummer",
+				"title": "Trein Details",
+				"type": "Type"
+			}
+		},
+		"top": {
+			"first": "Van",
+			"second": "Naar"
+		}
+	},
+	"select": {
+		"error": "Je moet je VAN en NAAR invullen!",
+		"internetError": "Geen internetverbinding!",
+		"routeDetails": {
+			"arrival": {
+				"hint": "Kies een station",
+				"label": "Naar"
+			},
+			"button": "ZOEKEN",
+			"departure": {
+				"hint": "Kies een station",
+				"label": "Van"
+			},
+			"time": {
+				"label": "Tijd",
+				"modal": {
+					"bottom": {
+						"leftBtn": "ANNULEREN",
+						"rightBtn": "BEVESTIGEN"
+					},
+					"center": {
+						"button": "Nu"
+					},
+					"top": {
+						"first": "VERTREK",
+						"second": "AANKOMST"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "Naar",
+				"startStation": "Van"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "Opslaan",
+				"chooseTitle": "Kies uw taal"
+			},
+			"otherInfo": {
+				"Version": "Versie",
+				"contactUs": "Mail ons",
+				"openSource": "Bezoek het project op Github",
+				"rate": "Beoordeel ons op Google Play",
+				"support": "Help de app"
+			}
+		},
+		"top": {
+			"title": "Instellingen"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "Help met vertalen",
+			"intro": "Als je wilt helpen, kan je helpen met het vertalen naar een van de volgende talen:"
+		},
+		"thanks": {
+			"intro": "Ik wil graag de volgende personen bedanken voor te helpen met vertalen:"
+		},
+		"top": {
+			"title": "Informatie"
+		}
+	}
+}
