@@ -40,7 +40,7 @@ export class RequestService {
   getTheRoute(travel: any): Observable<any> {
     return this.postRequest(this.url.schedulesDay, travel, 'getTheRoute')
   }
-  
+
   /**
    * Handle Get Http operation.
    * @param url - url of the http request
