@@ -7,7 +7,7 @@
             <ngx-mat-select-search [formControl]="stationFilterCtrl" noEntriesFoundLabel=""  placeholderLabel="{{ 'select.searchBar.hintText.startStation' | translate }}"></ngx-mat-select-search>
           </mat-option>
           <mat-option *ngFor="let station of filteredStations | async" [value]="station">
-            {{station['eng站名']}}
+            {{ station | translateStation }}
           </mat-option>
         </mat-select>
       </mat-form-field>
