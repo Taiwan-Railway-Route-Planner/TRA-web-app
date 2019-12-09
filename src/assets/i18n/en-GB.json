@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "We can't find any route for that day!",
+		"stations": "Please, Try again later!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "E-ticket",
+				"single": "Single Ticket"
+			},
+			"top": {
+				"title": "Travel Details"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "Number",
+				"title": "Train Details",
+				"type": "Type"
+			}
+		},
+		"top": {
+			"first": "Departure Station",
+			"second": "Arrival Station"
+		}
+	},
+	"select": {
+		"error": "You didn't fill in a destination or departure!",
+		"internetError": "No internet connection!",
+		"routeDetails": {
+			"arrival": {
+				"hint": "Select station",
+				"label": "To"
+			},
+			"button": "SEARCH",
+			"departure": {
+				"hint": "Select station",
+				"label": "From"
+			},
+			"time": {
+				"label": "Time",
+				"modal": {
+					"bottom": {
+						"leftBtn": "DISCARD",
+						"rightBtn": "CONFIRM"
+					},
+					"center": {
+						"button": "Now"
+					},
+					"top": {
+						"first": "DEPARTURE",
+						"second": "ARRIVAL"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "Select arrival station",
+				"startStation": "Select departure station"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "Save",
+				"chooseTitle": "Choose your language"
+			},
+			"otherInfo": {
+				"Version": "Version",
+				"contactUs": "Email us",
+				"openSource": "Visit the project on Github",
+				"rate": "Rate us on Google Play",
+				"support": "More Information"
+			}
+		},
+		"top": {
+			"title": "Settings Menu"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "Help translating",
+			"intro": "If you want to help, you can help translating the following languages:"
+		},
+		"thanks": {
+			"intro": "I would like to thank the following persons for helping translating:"
+		},
+		"top": {
+			"title": "Information"
+		}
+	}
+}

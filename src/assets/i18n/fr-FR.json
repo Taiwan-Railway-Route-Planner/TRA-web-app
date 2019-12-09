@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "Nous ne pouvons trouver aucun itinéraire pour ce jour!",
+		"stations": "Veuillez réessayer plus tard!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "E-ticket",
+				"single": "Billet papier"
+			},
+			"top": {
+				"title": "Détails du voyage"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "Nombre",
+				"title": "Détails du train",
+				"type": "Type"
+			}
+		},
+		"top": {
+			"first": "Gare de départ",
+			"second": "Gare d'arrivée"
+		}
+	},
+	"select": {
+		"error": "Vous n'avez pas renseigné de destination ou de départ!",
+		"internetError": "Pas de connexion Internet!",
+		"routeDetails": {
+			"arrival": {
+				"hint": "Choisissez votre station",
+				"label": "Arrivée"
+			},
+			"button": "RECHERCHER",
+			"departure": {
+				"hint": "Choisissez votre station",
+				"label": "Départ"
+			},
+			"time": {
+				"label": "L'heure",
+				"modal": {
+					"bottom": {
+						"leftBtn": "ANNULER",
+						"rightBtn": "ACCEPTER"
+					},
+					"center": {
+						"button": "Maintenant"
+					},
+					"top": {
+						"first": "DÉPART",
+						"second": "ARRIVÉE"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "Sélectionnez la gare d'arrivée",
+				"startStation": "Sélectionnez la gare de départ"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "Enregistrer",
+				"chooseTitle": "Choisissez votre langue"
+			},
+			"otherInfo": {
+				"Version": "Version",
+				"contactUs": "Contactez-nous",
+				"openSource": "Visitez le projet sur Github",
+				"rate": "Évaluez-nous sur Google Play",
+				"support": "Plus d'information"
+			}
+		},
+		"top": {
+			"title": "Paramètres"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "Aidez à traduire",
+			"intro": "Si vous voulez aider, vous pouvez aider à traduire les langues suivantes:"
+		},
+		"thanks": {
+			"intro": "Je voudrais remercier les personnes suivantes pour leur aide à la traduction:"
+		},
+		"top": {
+			"title": "Information"
+		}
+	}
+}

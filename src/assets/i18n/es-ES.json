@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "¡No hemos podido encontrar ningún itinerario para ese día!",
+		"stations": "¡Por favor, inténtelo de nuevo más tarde!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "Billete electrónico",
+				"single": "Billete físico"
+			},
+			"top": {
+				"title": "Detalles del recorrido"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "Número",
+				"title": "Detalles del tren",
+				"type": "Tipo"
+			}
+		},
+		"top": {
+			"first": "Estación de origen",
+			"second": "Estación de destino"
+		}
+	},
+	"select": {
+		"error": "¡No has seleccionado estación de origen o destino!",
+		"internetError": "¡No hay conexión a internet!",
+		"routeDetails": {
+			"arrival": {
+				"hint": "Escoge una estación",
+				"label": "Destino"
+			},
+			"button": "Buscar",
+			"departure": {
+				"hint": "Escoge una estación",
+				"label": "Origen"
+			},
+			"time": {
+				"label": "Fecha y hora",
+				"modal": {
+					"bottom": {
+						"leftBtn": "Descartar",
+						"rightBtn": "Confirmar"
+					},
+					"center": {
+						"button": "Ahora"
+					},
+					"top": {
+						"first": "Salida",
+						"second": "Llegada"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "Selecciona la estación de destino",
+				"startStation": "Selecciona la estación de origen"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "Guardar",
+				"chooseTitle": "Selecciona un idioma"
+			},
+			"otherInfo": {
+				"Version": "Versión",
+				"contactUs": "Contacta con nosotros mediante email",
+				"openSource": "Visita la página del proyecto en Github",
+				"rate": "Valoranos en Google Play",
+				"support": "Más información"
+			}
+		},
+		"top": {
+			"title": "Opciones"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "Ayudar en la traducción",
+			"intro": "Si deseas contribuir, puedes ayudarnos a traducir los siguientes idiomas:"
+		},
+		"thanks": {
+			"intro": "Me gustaría agradecer a las siguientes personas por su ayuda con las traducciones:"
+		},
+		"top": {
+			"title": "Información"
+		}
+	}
+}

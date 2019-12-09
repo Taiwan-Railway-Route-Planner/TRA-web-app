@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "Wir können keine Route für diesen Tag finden",
+		"stations": "Bitte versuche es später noch einmal!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "E-Ticket",
+				"single": "Papier-Fahrkarte"
+			},
+			"top": {
+				"title": "Details zur Reise"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "Nummer",
+				"title": "Details zum Zug",
+				"type": "Typ"
+			}
+		},
+		"top": {
+			"first": "Abfahrtshaltestelle",
+			"second": "Ankunftshaltestelle"
+		}
+	},
+	"select": {
+		"error": "Du hast kein Ziel oder einen Startpunkt angegeben",
+		"internetError": "Keine Internetverbindung !",
+		"routeDetails": {
+			"arrival": {
+				"hint": "Wähle eine Haltestelle",
+				"label": "Zu"
+			},
+			"button": "SUCHE",
+			"departure": {
+				"hint": "Wähle eine Haltestelle",
+				"label": "Von"
+			},
+			"time": {
+				"label": "Abfahrtszeitpunkt",
+				"modal": {
+					"bottom": {
+						"leftBtn": "VERWERFEN",
+						"rightBtn": "BESTÄTIGEN"
+					},
+					"center": {
+						"button": "Jetzt"
+					},
+					"top": {
+						"first": "ABFAHRT",
+						"second": "ANKUNFT"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "Wähle eine Ankunftshaltestelle",
+				"startStation": "Wähle eine Abfahrtshaltestelle"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "Speichern",
+				"chooseTitle": "Wähle deine Sprache aus"
+			},
+			"otherInfo": {
+				"Version": "Version",
+				"contactUs": "Schreibe uns eine Email",
+				"openSource": "Sieh dir das Projekt auf Github an",
+				"rate": "Bewerte uns auf Google Play",
+				"support": "Mehr Informationen"
+			}
+		},
+		"top": {
+			"title": "Einstellungen"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "Hilf beim Übersetzen",
+			"intro": "Wenn du uns unterstützen möchtest, kannst du uns beim Übersetzen in folgende Sprachen helfen:"
+		},
+		"thanks": {
+			"intro": "Ich möchte folgenden Personen für ihre Hilfe beim Übersetzen danken:"
+		},
+		"top": {
+			"title": "Informationen"
+		}
+	}
+}

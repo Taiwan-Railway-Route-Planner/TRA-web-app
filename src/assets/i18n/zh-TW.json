@@ -1,0 +1,95 @@
+{
+	"otherErrors": {
+		"route": "那天我們找不到任何路線!",
+		"stations": "沒有網絡連接!"
+	},
+	"route": {
+		"details": {
+			"price": {
+				"ePrice": "電子票證",
+				"single": "單程票"
+			},
+			"top": {
+				"title": "旅行細節"
+			}
+		},
+		"stopDetails": {
+			"top": {
+				"number": "數",
+				"title": "火車詳情",
+				"type": "類型"
+			}
+		},
+		"top": {
+			"first": "離開站",
+			"second": "抵達站"
+		}
+	},
+	"select": {
+		"error": "離開的站!",
+		"internetError": "沒有網絡連接!",
+		"routeDetails": {
+			"arrival": {
+				"hint": "選擇哪一站",
+				"label": "去"
+			},
+			"button": "搜尋",
+			"departure": {
+				"hint": "選擇哪一站",
+				"label": "從"
+			},
+			"time": {
+				"label": "時間",
+				"modal": {
+					"bottom": {
+						"leftBtn": "取消",
+						"rightBtn": "確認"
+					},
+					"center": {
+						"button": "現在"
+					},
+					"top": {
+						"first": "離開",
+						"second": "抵達"
+					}
+				}
+			}
+		},
+		"searchBar": {
+			"hintText": {
+				"endStation": "選擇抵達的車站",
+				"startStation": "選擇離開的車站"
+			}
+		}
+	},
+	"settings": {
+		"center": {
+			"language": {
+				"button": "保存",
+				"chooseTitle": "選擇你的語言"
+			},
+			"otherInfo": {
+				"Version": "版",
+				"contactUs": "電郵我們",
+				"openSource": "訪問Github上的項目",
+				"rate": "在Google Play上為我們評分",
+				"support": "更多信息"
+			}
+		},
+		"top": {
+			"title": "設定功能表"
+		}
+	},
+	"thanks": {
+		"information": {
+			"btn": "幫助翻譯",
+			"intro": "如果您需要幫助，可以幫助翻譯以下語言："
+		},
+		"thanks": {
+			"intro": "我感謝以下人員的翻譯幫助："
+		},
+		"top": {
+			"title": "資訊"
+		}
+	}
+}
