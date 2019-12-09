@@ -1,1 +1,20 @@
-<p>main-page works!</p>
+<div class="travelDetails">
+  <mat-card class="example-card">
+    <mat-card-content>
+      <div class="stationForm">
+        <mat-form-field>
+          <input matInput placeholder="{{'select.searchBar.hintText.startStation' | translate}}"/>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="{{'select.searchBar.hintText.endStation' | translate}}"/>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>
+      <button color="primary"
+              mat-raised-button>{{ 'select.routeDetails.time.modal.bottom.leftBtn' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
