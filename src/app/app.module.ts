@@ -8,6 +8,8 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -28,6 +30,7 @@ import { MainPageComponent } from './main-page/main-page.component';
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyMaterialModule,
+    NgxMatSelectSearchModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
