@@ -14,7 +14,7 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './main-page/main-page.component';
-import { TranslateStationPipe } from './translate-station.pipe';
+import { TranslateStationPipe } from './pipe/translate-station.pipe';
 import { StationSearchComponent } from './main-page/station-search/station-search.component';
 
 
