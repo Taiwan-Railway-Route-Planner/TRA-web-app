@@ -1,0 +1,59 @@
+$primary: #1a0dab
+$white: #fff
+$grey: grey
+
+.container
+  display: flex
+  flex-direction: column
+  .stationSearch
+    display: flex
+    flex-direction: row
+    margin-top: 3%
+    span
+      width: 100%
+      i.fa-times-circle
+        margin-left: 3%
+        width: 7%
+        cursor: pointer
+      i.first
+        width: 7%
+        margin-left: 3%
+      .search-text
+        width: 69%
+      .button
+        cursor: pointer
+        background-color: $primary
+        color: $white
+        padding: 4px 4px
+        border-radius: 16px
+        margin-bottom: 0
+        line-height: 1.42857143
+        text-align: center
+        white-space: normal
+        vertical-align: middle
+        border: transparent solid 1px
+        width: 10%
+  .scroll-class
+    overflow-x: auto
+    height: 52px
+    scrollbar-width: thin
+    .countiesFilter
+      display: flex
+      flex-wrap: nowrap
+      height: 30px
+      .bubble
+        margin-left: 4px
+        margin-right: 4px
+        padding: 4px 4px
+        border-radius: 16px
+        flex: 0 0 auto
+        background-color: $primary
+        color: $white
+        border: $primary solid 1px
+      .counties.bubble
+        background-color: $white
+        color: $grey
+  .listOfStations
+    margin-left: 4%
+    p
+      cursor: pointer
