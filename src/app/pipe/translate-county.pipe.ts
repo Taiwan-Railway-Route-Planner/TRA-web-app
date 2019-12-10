@@ -17,5 +17,4 @@ export class TranslateCountyPipe implements PipeTransform {
       return `${county.縣市}`
     }
   }
-
 }
