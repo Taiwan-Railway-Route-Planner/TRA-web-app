@@ -6,6 +6,7 @@
         <input *ngIf="departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
         <input *ngIf="!departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
       </mat-form-field>
+      <i class="far fa-times-circle" (click)="discard()"></i>
       <button class="button" matTooltip="{{ 'select.routeDetails.time.modal.bottom.rightBtn' | translate }}" matTooltipPosition="left" (click)="emitSelectedStation()">
         <i class="fas fa-arrow-right second"></i>
       </button>
