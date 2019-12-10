@@ -3,26 +3,27 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ReactiveFormsModule} from '@angular/forms';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
-import { MaterialModule } from './materialDesign';
-
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import { MaterialModule } from './materialDesign';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './main-page/main-page.component';
 import { TranslateStationPipe } from './translate-station.pipe';
+import { StationSearchComponent } from './main-page/station-search/station-search.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    TranslateStationPipe
+    TranslateStationPipe,
+    StationSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +33,6 @@ import { TranslateStationPipe } from './translate-station.pipe';
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyMaterialModule,
-    NgxMatSelectSearchModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
@@ -42,7 +42,8 @@ import { TranslateStationPipe } from './translate-station.pipe';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
