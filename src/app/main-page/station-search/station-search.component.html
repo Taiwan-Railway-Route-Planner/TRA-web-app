@@ -11,12 +11,12 @@
     </span>
   </div>
 
-  <div class="countiesFilter">
-    <div class="bubble">
-      <mat-icon>mode_world</mat-icon>
-    </div>
-    <div class="" *ngFor="let county of listOfCounties">
+  <div class="scroll-class">
+    <div class="countiesFilter">
       <div class="bubble">
+        <i class="fas fa-globe-asia"></i>
+      </div>
+      <div class="counties bubble" *ngFor="let county of listOfCounties">
         {{ county | translateCounty }}
       </div>
     </div>
