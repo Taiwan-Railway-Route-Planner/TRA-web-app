@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { RequestService } from '../service/request.service';
-import { Station } from '../station';
+import { Station } from '../class/station';
+import { StationInfoService } from "../service/station-info.service";
 
 @Component({
   selector: 'app-main-page',
@@ -16,15 +17,18 @@ export class MainPageComponent implements OnInit {
   departureOrArrivalStation: boolean;
   showSearchDetails: boolean = false;
 
-  constructor(private requestService: RequestService,) { }
+  constructor(
+    private requestService: RequestService,
+    private stationInfoService: StationInfoService
+  ) { }
 
   ngOnInit() {
     this.getStationList();
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
+    this.stationInfoService.updateFilterStation(departureOrArrivalStation? this.departureStation : this.arrivalStation);
     this.departureOrArrivalStation = departureOrArrivalStation;
-    console.log(this.departureOrArrivalStation)
     this.showSearchDetails = true;
   }
 
@@ -33,6 +37,7 @@ export class MainPageComponent implements OnInit {
     this.requestService.getStation().subscribe(function (stationListData) {
       _self.stationInfo = stationListData;
       _self.stationList = stationListData.stations;
+      _self.stationInfoService.initService(stationListData);
     });
   }
 
