@@ -13,6 +13,7 @@ import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 // import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TimeDetails} from "../class/timeDetails";
+import {map} from "rxjs/operators";
 
 const moment = _rollupMoment || _moment;
 
@@ -40,6 +41,16 @@ export class MainPageComponent implements OnInit {
   arrivalStation: Station;
   departureOrArrivalStation: boolean;
   showSearchDetails: boolean = false;
+
+  prop$ = this.translateService.onLangChange.pipe(
+    map(langChangeEvent => {
+      if (langChangeEvent.lang !== 'zh-TW'){
+       return 'eng站名'
+      } else {
+        return '站名'
+      }
+    })
+  )
 
   constructor(
     private requestService: RequestService,
