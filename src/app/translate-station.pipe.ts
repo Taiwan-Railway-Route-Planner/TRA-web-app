@@ -12,11 +12,16 @@ export class TranslateStationPipe implements PipeTransform {
   }
 
   transform(station: Station): string {
-    if (this.translateService.currentLang !== 'zh-TW'){
-      return `${station.eng站名}  (${station.traWebsiteCode})`
+    if (station === undefined){
+      return '';
     } else {
-      return `${station.站名}  (${station.traWebsiteCode})`
+      if (this.translateService.currentLang !== 'zh-TW'){
+        return `${station.eng站名}  (${station.traWebsiteCode})`
+      } else {
+        return `${station.站名}  (${station.traWebsiteCode})`
+      }
     }
+
   }
 
 }
