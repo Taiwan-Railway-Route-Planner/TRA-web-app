@@ -13,6 +13,8 @@ export class MainPageComponent implements OnInit {
   stationList: Station[];
   departureStation: Station;
   arrivalStation: Station;
+  departureOrArrivalStation: boolean;
+  showSearchDetails: boolean = false;
 
   constructor(private requestService: RequestService,) { }
 
@@ -21,7 +23,9 @@ export class MainPageComponent implements OnInit {
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
-    console.log(departureOrArrivalStation)
+    this.departureOrArrivalStation = departureOrArrivalStation;
+    console.log(this.departureOrArrivalStation)
+    this.showSearchDetails = true;
   }
 
   getStationList() : void {
@@ -30,6 +34,15 @@ export class MainPageComponent implements OnInit {
       _self.stationInfo = stationListData;
       _self.stationList = stationListData.stations;
     });
+  }
+
+  updateStation($event: Station){
+    if (this.departureOrArrivalStation){
+      this.departureStation = $event;
+    } else {
+      this.arrivalStation = $event;
+    }
+    this.showSearchDetails = false;
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="travelDetails">
-  <app-station-search class="stationSearchContainer" ></app-station-search>
-  <mat-card class="example-card">
+  <app-station-search [departureOrArrivalStation]="departureOrArrivalStation" *ngIf="showSearchDetails" class="stationSearchContainer" (getSelectedStation)="updateStation($event)"></app-station-search>
+  <mat-card class="example-card" *ngIf="!showSearchDetails">
     <mat-card-content>
 
       <div class="stationForm">
