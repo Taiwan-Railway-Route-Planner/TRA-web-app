@@ -31,6 +31,7 @@ export class StationSearchComponent implements OnInit {
 
   selectThisStation(selectedStation: Station){
     this.selectedStation = selectedStation;
+    window.scrollTo(0,0);
   }
 
   discard() {
