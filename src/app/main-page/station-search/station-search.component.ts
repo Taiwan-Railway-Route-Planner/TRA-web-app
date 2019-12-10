@@ -10,15 +10,26 @@ import { StationInfoService } from "../../service/station-info.service";
 export class StationSearchComponent implements OnInit {
 
   @Input() departureOrArrivalStation: boolean;
-  @Output() getSelectedStation = new EventEmitter<Station>();
+  @Output() selectedStationEvent = new EventEmitter<Station>();
   listOfPossibleStations: Station[];
   listOfCounties: any;
+  selectedStation: Station;
 
   constructor(private stationInfoService: StationInfoService) { }
 
   ngOnInit() {
     this.listOfPossibleStations = this.stationInfoService.getFilterStation();
     this.listOfCounties = this.stationInfoService.getCounties();
+  }
+
+  emitSelectedStation() {
+    this.selectedStationEvent.emit(this.selectedStation);
+    this.listOfPossibleStations = this.stationInfoService.getFilterStation();
+    this.selectedStation = undefined;
+  }
+
+  selectThisStation(selectedStation: Station){
+    this.selectedStation = selectedStation;
   }
 
 }
