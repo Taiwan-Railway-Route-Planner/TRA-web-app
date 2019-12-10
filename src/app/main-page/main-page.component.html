@@ -3,14 +3,14 @@
     <mat-card-content>
 
       <div class="stationForm">
-        <div class="station-input-element">
+        <div class="station-input-element" (click)="openStationList(true)">
           <p>{{ 'select.routeDetails.departure.label' | translate}}</p>
           <mat-form-field>
             <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation | translateStation"/>
           </mat-form-field>
         </div>
 
-        <div class="station-input-element" [@click]="openStationList(false)">
+        <div class="station-input-element" (click)="openStationList(false)">
           <p>{{ 'select.routeDetails.arrival.label' | translate }}</p>
           <mat-form-field>
             <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation | translateStation"/>
