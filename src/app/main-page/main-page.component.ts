@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
 import { Station } from '../class/station';
 import { StationInfoService } from "../service/station-info.service";
@@ -10,7 +10,8 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+// import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+import { TimeDetails} from "../class/timeDetails";
 
 const moment = _rollupMoment || _moment;
 
@@ -92,12 +93,24 @@ export class MainPageComponent implements OnInit {
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
+  stopSearching() {
+    this.showSearchDetails = false;
+  }
+
   discard() {
     this.arrivalStation = undefined;
     this.departureStation = undefined;
   }
 
-  stopSearching() {
-    this.showSearchDetails = false;
+  confirm(){
+    this.buildTheInformationForTheTrainRecords();
+
   }
+
+  buildTheInformationForTheTrainRecords() : TimeDetails {
+    let date = moment(this.date).locale('en').format('YYYYMMDD');
+    let time = moment(this.timeStamp).format('HH:mm');
+    return {date, time};
+  }
+
 }
