@@ -28,6 +28,8 @@ export class StationInfoService {
   updateFilterStation(stationToFilter: Station): void {
     if (stationToFilter !== undefined){
       this._filteredStationList = this._pureStationList.filter(station => station.時刻表編號 === stationToFilter.時刻表編號);
+    } else {
+      this._filteredStationList = this._pureStationList;
     }
   }
 
