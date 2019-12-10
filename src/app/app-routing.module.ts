@@ -5,7 +5,7 @@ import { TrainOverviewComponent } from "./train-overview/train-overview.componen
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: '/train', component: TrainOverviewComponent },
+  { path: 'train', component: TrainOverviewComponent },
 ];
 
 @NgModule({
