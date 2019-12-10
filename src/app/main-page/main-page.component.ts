@@ -38,6 +38,7 @@ export class MainPageComponent implements OnInit {
       _self.stationInfo = stationListData;
       _self.stationList = stationListData.stations;
       _self.stationInfoService.initService(stationListData);
+      _self.showSearchDetails = true;
     });
   }
 
