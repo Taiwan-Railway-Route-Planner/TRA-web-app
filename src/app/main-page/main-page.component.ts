@@ -60,4 +60,8 @@ export class MainPageComponent implements OnInit {
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
+  discard() {
+    this.arrivalStation = undefined;
+    this.departureStation = undefined;
+  }
 }
