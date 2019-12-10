@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Station } from "../station";
+import { Station } from "../class/station";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,9 @@ export class StationInfoService {
   }
 
   updateFilterStation(stationToFilter: Station): void {
-    this._filteredStationList = this._pureStationList.filter(station => station.時刻表編號 === stationToFilter.時刻表編號);
+    if (stationToFilter !== undefined){
+      this._filteredStationList = this._pureStationList.filter(station => station.時刻表編號 === stationToFilter.時刻表編號);
+    }
   }
 
 
