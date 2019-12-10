@@ -3,12 +3,32 @@ import { RequestService } from '../service/request.service';
 import { Station } from '../class/station';
 import { StationInfoService } from "../service/station-info.service";
 
+import { FormControl } from '@angular/forms';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as _moment from 'moment';
+// @ts-ignore
+import { default as _rollupMoment } from 'moment';
+import { TranslateService } from "@ngx-translate/core";
+
+const moment = _rollupMoment || _moment;
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.sass']
+  styleUrls: ['./main-page.component.sass'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+  ],
 })
 export class MainPageComponent implements OnInit {
+
+  date = new FormControl(moment());
 
   stationInfo: any;
   stationList: Station[];
@@ -19,11 +39,14 @@ export class MainPageComponent implements OnInit {
 
   constructor(
     private requestService: RequestService,
-    private stationInfoService: StationInfoService
+    private stationInfoService: StationInfoService,
+    private translateService: TranslateService,
+    private _adapter: DateAdapter<any>
   ) { }
 
   ngOnInit() {
     this.getStationList();
+    this._adapter.setLocale(this.translateService.currentLang);
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
@@ -40,9 +63,9 @@ export class MainPageComponent implements OnInit {
       _self.stationInfoService.initService(stationListData);
 
       // debug
-      _self.departureOrArrivalStation = true;
-      _self.stationInfoService.updateFilterStation(_self.departureOrArrivalStation? _self.arrivalStation : _self.departureStation);
-      _self.showSearchDetails = true;
+      // _self.departureOrArrivalStation = true;
+      // _self.stationInfoService.updateFilterStation(_self.departureOrArrivalStation? _self.arrivalStation : _self.departureStation);
+      // _self.showSearchDetails = true;
     });
   }
 
