@@ -22,8 +22,10 @@
     </div>
   </div>
 
-  <div class="">
-    <p></p>
+  <div class="listOfStations">
+    <p *ngFor="let station of listOfPossibleStations">
+      {{ station | translateStation }}
+    </p>
   </div>
 
 </div>
