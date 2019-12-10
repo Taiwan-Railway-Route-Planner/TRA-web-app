@@ -1,18 +1,17 @@
 <div class="travelDetails">
-  <app-station-search *ngIf="showSearchDetails" [departureOrArrivalStation]="departureOrArrivalStation" class="stationSearchContainer" (selectedStationEvent)="updateStation($event)"></app-station-search>
+  <app-station-search *ngIf="showSearchDetails" [departureOrArrivalStation]="departureOrArrivalStation" class="stationSearchContainer" (stopEvent)="stopSearching()" (selectedStationEvent)="updateStation($event)"></app-station-search>
   <mat-card class="example-card" *ngIf="!showSearchDetails">
     <mat-card-content>
-
       <div class="stationForm">
         <div class="station-input-element" (click)="openStationList(true)">
-          <p>{{ 'select.routeDetails.departure.label' | translate}}</p>
+          <p>{{ 'select.routeDetails.departure.label' | translate}}:</p>
           <mat-form-field>
             <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation | translateStation"/>
           </mat-form-field>
         </div>
 
         <div class="station-input-element" (click)="openStationList(false)">
-          <p>{{ 'select.routeDetails.arrival.label' | translate }}</p>
+          <p>{{ 'select.routeDetails.arrival.label' | translate }}:</p>
           <mat-form-field>
             <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation | translateStation"/>
           </mat-form-field>

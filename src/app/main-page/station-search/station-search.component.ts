@@ -11,6 +11,7 @@ export class StationSearchComponent implements OnInit {
 
   @Input() departureOrArrivalStation: boolean;
   @Output() selectedStationEvent = new EventEmitter<Station>();
+  @Output() stopEvent = new EventEmitter();
   listOfPossibleStations: Station[];
   listOfCounties: any;
   selectedStation: Station;
@@ -32,4 +33,7 @@ export class StationSearchComponent implements OnInit {
     this.selectedStation = selectedStation;
   }
 
+  discard() {
+    this.stopEvent.emit();
+  }
 }

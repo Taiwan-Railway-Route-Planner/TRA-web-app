@@ -64,4 +64,8 @@ export class MainPageComponent implements OnInit {
     this.arrivalStation = undefined;
     this.departureStation = undefined;
   }
+
+  stopSearching() {
+    this.showSearchDetails = false;
+  }
 }
