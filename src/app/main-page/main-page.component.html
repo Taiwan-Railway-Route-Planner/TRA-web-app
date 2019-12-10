@@ -1,27 +1,26 @@
 <div class="travelDetails">
   <mat-card class="example-card">
     <mat-card-content>
-      <mat-form-field>
-        <mat-select [formControl]="stationCtrl" placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}" #singleSelect>
-          <mat-option>
-            <ngx-mat-select-search [formControl]="stationFilterCtrl" noEntriesFoundLabel=""  placeholderLabel="{{ 'select.searchBar.hintText.startStation' | translate }}"></ngx-mat-select-search>
-          </mat-option>
-          <mat-option *ngFor="let station of filteredStations | async" [value]="station">
-            {{ station | translateStation }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
 
       <div class="stationForm">
-        <mat-form-field>
-          <input matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}"/>
-        </mat-form-field>
+        <div class="station-input-element">
+          <p>{{ 'select.routeDetails.departure.label' | translate}}</p>
+          <mat-form-field>
+            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation | translateStation"/>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field>
-          <input matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}"/>
-        </mat-form-field>
+        <div class="station-input-element" [@click]="openStationList(false)">
+          <p>{{ 'select.routeDetails.arrival.label' | translate }}</p>
+          <mat-form-field>
+            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation | translateStation"/>
+          </mat-form-field>
+        </div>
       </div>
     </mat-card-content>
+
+
+
     <mat-card-actions>
       <button color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>
       <button color="primary"
