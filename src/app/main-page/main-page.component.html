@@ -17,11 +17,20 @@
           </mat-form-field>
         </div>
 
-        <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker touchUi #picker></mat-datepicker>
-        </mat-form-field>
+        <div class="time-information">
+          <p class="time-title-info">{{ 'select.routeDetails.time.label' | translate }}:</p>
+          <mat-form-field class="date-picker">
+            <input matInput [matDatepicker]="picker" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="time-picker">
+            <mat-form-field>
+              <input matInput [ngxTimepicker]="defaultValue" [value]="timeStamp">
+              <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
+            </mat-form-field>
+          </div>
+        </div>
 
 
       </div>
