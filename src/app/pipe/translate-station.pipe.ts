@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {Station} from "./station";
+import {Station} from "../station";
 
 @Pipe({
   name: 'translateStation',
