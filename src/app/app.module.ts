@@ -14,16 +14,18 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './main-page/main-page.component';
-import { TranslateStationPipe } from './pipe/translate-station.pipe';
 import { StationSearchComponent } from './main-page/station-search/station-search.component';
 
+import { TranslateStationPipe } from './pipe/translate-station.pipe';
+import { TranslateCountyPipe } from './pipe/translate-county.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     TranslateStationPipe,
-    StationSearchComponent
+    StationSearchComponent,
+    TranslateCountyPipe,
   ],
   imports: [
     BrowserModule,
