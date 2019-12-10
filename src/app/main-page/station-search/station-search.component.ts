@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Station} from "../../station";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Station } from "../../class/station";
+import { StationInfoService } from "../../service/station-info.service";
 
 @Component({
   selector: 'app-station-search',
@@ -11,11 +12,13 @@ export class StationSearchComponent implements OnInit {
   @Input() departureOrArrivalStation: boolean;
   @Output() getSelectedStation = new EventEmitter<Station>();
   listOfPossibleStations: Station[];
+  listOfCounties: any;
 
-  constructor() { }
+  constructor(private stationInfoService: StationInfoService) { }
 
   ngOnInit() {
-    console.log(this.departureOrArrivalStation)
+    this.listOfPossibleStations = this.stationInfoService.getFilterStation();
+    this.listOfCounties = this.stationInfoService.getCounties();
   }
 
 }
