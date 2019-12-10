@@ -1,9 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { RequestService } from '../request.service';
+import { RequestService } from '../service/request.service';
 import { Station } from '../station';
-import { FormControl } from "@angular/forms";
-import { ReplaySubject, Subject } from "rxjs";
-import { filter, map, takeUntil, tap } from "rxjs/operators";
 
 @Component({
   selector: 'app-main-page',
@@ -23,8 +20,8 @@ export class MainPageComponent implements OnInit {
     this.getStationList();
   }
 
-  openStationList(departureOrArrivalStation: boolean){
-
+  openStationList(departureOrArrivalStation: boolean): void{
+    console.log(departureOrArrivalStation)
   }
 
   getStationList() : void {
