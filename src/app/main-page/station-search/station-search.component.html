@@ -15,9 +15,9 @@
     <div class="bubble">
       <mat-icon>mode_world</mat-icon>
     </div>
-    <div class="">
+    <div class="" *ngFor="let county of listOfCounties">
       <div class="bubble">
-
+        {{ county | translateCounty }}
       </div>
     </div>
   </div>
