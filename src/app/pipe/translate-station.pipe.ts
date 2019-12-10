@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {Station} from "../station";
+import { Station } from "../class/station";
 
 @Pipe({
   name: 'translateStation',
@@ -8,8 +8,7 @@ import {Station} from "../station";
 })
 export class TranslateStationPipe implements PipeTransform {
 
-  constructor(private translateService: TranslateService) {
-  }
+  constructor(private translateService: TranslateService) {}
 
   transform(station: Station): string {
     if (station === undefined){
@@ -21,7 +20,6 @@ export class TranslateStationPipe implements PipeTransform {
         return `${station.站名}  (${station.traWebsiteCode})`
       }
     }
-
   }
 
 }
