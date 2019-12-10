@@ -27,7 +27,7 @@ export class MainPageComponent implements OnInit {
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
-    this.stationInfoService.updateFilterStation(departureOrArrivalStation? this.departureStation : this.arrivalStation);
+    this.stationInfoService.updateFilterStation(departureOrArrivalStation? this.arrivalStation : this.departureStation);
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
   }
@@ -40,7 +40,8 @@ export class MainPageComponent implements OnInit {
       _self.stationInfoService.initService(stationListData);
 
       // debug
-      _self.stationInfoService.updateFilterStation(true? this.departureStation : this.arrivalStation);
+      _self.departureOrArrivalStation = true;
+      _self.stationInfoService.updateFilterStation(_self.departureOrArrivalStation? _self.arrivalStation : _self.departureStation);
       _self.showSearchDetails = true;
     });
   }
@@ -48,10 +49,15 @@ export class MainPageComponent implements OnInit {
   updateStation($event: Station){
     if (this.departureOrArrivalStation){
       this.departureStation = $event;
+      if (this.arrivalStation !== undefined){
+        this.showSearchDetails = false;
+      }
     } else {
       this.arrivalStation = $event;
+      this.showSearchDetails = false;
     }
-    this.showSearchDetails = false;
+    this.stationInfoService.updateFilterStation(!this.departureOrArrivalStation? this.arrivalStation : this.departureStation);
+    this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
 }
