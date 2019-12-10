@@ -3,7 +3,10 @@
     <span>
       <i class="fas fa-search"></i>
       <mat-form-field class="search-text">
-        <input type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}">
+        <input *ngIf="departureOrArrivalStation; else other_search" type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}">
+        <ng-template #other_search>
+          <input type="string" matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}">
+        </ng-template>
       </mat-form-field>
     </span>
   </div>

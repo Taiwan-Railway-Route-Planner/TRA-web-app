@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Station} from "../../station";
 
 @Component({
   selector: 'app-station-search',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StationSearchComponent implements OnInit {
 
+  @Input() departureOrArrivalStation: boolean;
+  @Output() getSelectedStation = new EventEmitter<Station>();
+  listOfPossibleStations: Station[];
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.departureOrArrivalStation)
   }
 
 }
