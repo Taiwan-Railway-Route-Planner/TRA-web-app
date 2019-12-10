@@ -10,6 +10,7 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 const moment = _rollupMoment || _moment;
 
@@ -29,6 +30,7 @@ const moment = _rollupMoment || _moment;
 export class MainPageComponent implements OnInit {
 
   date = new FormControl(moment());
+  timeStamp = moment().format('LT');
 
   stationInfo: any;
   stationList: Station[];
@@ -48,8 +50,11 @@ export class MainPageComponent implements OnInit {
     this.getStationList();
     this._adapter.setLocale(this.translateService.currentLang);
 
+    // NgxMaterialTimepickerModule.setLocale(this.translateService.currentLang);
+
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this._adapter.setLocale(event.lang);
+      // NgxMaterialTimepickerModule.setLocale(event.lang);
     })
   }
 
