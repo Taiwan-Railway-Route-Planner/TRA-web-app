@@ -9,7 +9,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
-import { TranslateService } from "@ngx-translate/core";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 const moment = _rollupMoment || _moment;
 
@@ -47,6 +47,10 @@ export class MainPageComponent implements OnInit {
   ngOnInit() {
     this.getStationList();
     this._adapter.setLocale(this.translateService.currentLang);
+
+    this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+      this._adapter.setLocale(event.lang);
+    })
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
