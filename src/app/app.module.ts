@@ -18,6 +18,7 @@ import { StationSearchComponent } from './main-page/station-search/station-searc
 
 import { TranslateStationPipe } from './pipe/translate-station.pipe';
 import { TranslateCountyPipe } from './pipe/translate-county.pipe';
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TranslateCountyPipe } from './pipe/translate-county.pipe';
         deps: [HttpClient]
       }
     }),
-    FormsModule
+    FormsModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
