@@ -1,13 +1,14 @@
 <div class="container">
   <div class="stationSearch">
     <span>
-      <i class="fas fa-search"></i>
+      <i class="fas fa-search first"></i>
       <mat-form-field class="search-text">
-        <input *ngIf="departureOrArrivalStation; else other_search" type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}">
-        <ng-template #other_search>
-          <input type="string" matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}">
-        </ng-template>
+        <input *ngIf="departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
+        <input *ngIf="!departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
       </mat-form-field>
+      <button class="button" matTooltip="{{ 'select.routeDetails.time.modal.bottom.rightBtn' | translate }}" matTooltipPosition="left" (click)="emitSelectedStation()">
+        <i class="fas fa-arrow-right second"></i>
+      </button>
     </span>
   </div>
 
@@ -23,7 +24,7 @@
   </div>
 
   <div class="listOfStations">
-    <p *ngFor="let station of listOfPossibleStations">
+    <p *ngFor="let station of listOfPossibleStations" (click)="selectThisStation(station)">
       {{ station | translateStation }}
     </p>
   </div>
