@@ -11,10 +11,8 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-// import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TimeDetails} from "../class/timeDetails";
-import { map, startWith } from "rxjs/operators";
-import { combineLatest, Subject } from "rxjs";
+import {map, shareReplay, startWith} from "rxjs/operators";
 
 const moment = _rollupMoment || _moment;
 
@@ -42,77 +40,93 @@ export class MainPageComponent implements OnInit {
   arrivalStation: Station;
   departureOrArrivalStation: boolean;
   showSearchDetails: boolean = false;
+  prop$;
 
-  prop$ = this.translateService.onLangChange.pipe(
-    map(langChangeEvent => {
-      if (langChangeEvent.lang !== 'zh-TW'){
-       return 'eng站名'
-      } else {
-        return '站名'
-      }
-    }),
-    startWith('eng站名')
-  );
-  data$ = new Subject()
-  com$ = combineLatest(this.prop$, this.data$).pipe(
-    map(([prop, data]) =>  {
+  // data$ = new Subject();
+  // com$ = combineLatest(this.prop$, this.data$).pipe(
+  //   map(([prop, data]) =>  {
+  //
+  //     return {data,prop};
+  //   })
+  // )
 
-      return {data,prop};
-    })
-  )
+
+  // languageProp$ = this.translateService.onLangChange.pipe(
+  //   map(langChangeEvent => {
+  //     if (langChangeEvent.lang !== 'zh-TW'){
+  //       return 'eng站名'
+  //     } else {
+  //       return '站名'
+  //     }
+  //   }),
+  //   shareReplay(1),
+  //   tap(x => console.log({x}))
+  // );
 
   constructor(
     private requestService: RequestService,
-    private stationInfoService: StateStationService,
+    private state: StateStationService,
     private translateService: TranslateService,
     private trainRouteDetails: TrainRouteDetailsService,
     private _adapter: DateAdapter<any>
   ) { }
 
   ngOnInit() {
-    this.getStationList();
-    this._adapter.setLocale(this.translateService.currentLang);
+    // this.getStationList();
+    // this._adapter.setLocale(this.translateService.currentLang);
 
-    // NgxMaterialTimepickerModule.setLocale(this.translateService.currentLang);
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this._adapter.setLocale(event.lang);
-      // NgxMaterialTimepickerModule.setLocale(event.lang);
-    })
+    });
+
+    this.requestService.getStation().subscribe(stationInfo => this.state.updateStationInfoService(stationInfo));
+
+    this.prop$ = this.translateService.onLangChange.pipe(
+      startWith({lang: this.translateService.currentLang}),
+      map(langChangeEvent => {
+        if (langChangeEvent.lang !== 'zh-TW'){
+          return 'eng站名'
+        } else {
+          return '站名'
+        }
+      }),
+    );
+
   }
 
   openStationList(departureOrArrivalStation: boolean): void{
-    this.stationInfoService.updateFilterStation(departureOrArrivalStation? this.arrivalStation : this.departureStation);
+    // this.state.updateFilterStation(departureOrArrivalStation? this.arrivalStation : this.departureStation);
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
   }
 
-  getStationList() : void {
-    let _self = this;
-    this.requestService.getStation().subscribe(function (stationListData) {
-      _self.stationInfo = stationListData;
-      _self.stationList = stationListData.stations;
-      _self.stationInfoService.initService(stationListData);
-
-      // debug
-      // _self.departureOrArrivalStation = true;
-      // _self.stationInfoService.updateFilterStation(_self.departureOrArrivalStation? _self.arrivalStation : _self.departureStation);
-      // _self.showSearchDetails = true;
-    });
-  }
+  // getStationList() : void {
+  //   let _self = this;
+  //   this.requestService.getStation().subscribe(function (stationListData) {
+  //     _self.stationInfo = stationListData;
+  //     _self.stationList = stationListData.stations;
+  //     _self.state.initService(stationListData);
+  //
+  //     // debug
+  //     // _self.departureOrArrivalStation = true;
+  //     // _self.state.updateFilterStation(_self.departureOrArrivalStation? _self.arrivalStation : _self.departureStation);
+  //     // _self.showSearchDetails = true;
+  //   });
+  // }
 
   updateStation($event: Station){
-    if (this.departureOrArrivalStation){
-      this.departureStation = $event;
-      if (this.arrivalStation !== undefined){
-        this.showSearchDetails = false;
-      }
-    } else {
-      this.arrivalStation = $event;
-      this.showSearchDetails = false;
-    }
-    this.stationInfoService.updateFilterStation(!this.departureOrArrivalStation? this.arrivalStation : this.departureStation);
-    this.departureOrArrivalStation = !this.departureOrArrivalStation;
+    // if (this.departureOrArrivalStation){
+    //   this.state.updateDestinationStation($event);
+    //   if (this.arrivalStation !== undefined){
+    //     this.showSearchDetails = false;
+    //   }
+    // } else {
+    //   this.state.updateArrivalStation($event);
+    //   this.showSearchDetails = false;
+    // }
+    // this.state.updateFilterStation(!this.departureOrArrivalStation? this.arrivalStation : this.departureStation);
+    // this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
   stopSearching() {
