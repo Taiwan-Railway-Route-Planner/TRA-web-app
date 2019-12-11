@@ -26,7 +26,7 @@
 
   <div class="listOfStations">
     <p *ngFor="let station of listOfPossibleStations" (click)="selectThisStation(station)">
-      {{ station | translateStation }}
+      {{ (station[(prop$|async)]) +' ('+ station?.traWebsiteCode +')' }}
     </p>
   </div>
 

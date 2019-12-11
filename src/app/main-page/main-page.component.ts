@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
-import { Station } from '../class/station';
 import { StationInfoService } from "../service/station-info.service";
+import { TrainRouteDetailsService } from "../service/train-route-details.service";
+import { Station } from '../class/station';
 
 import { FormControl } from '@angular/forms';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -10,7 +11,9 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+// import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+import { TimeDetails} from "../class/timeDetails";
+import {map} from "rxjs/operators";
 
 const moment = _rollupMoment || _moment;
 
@@ -39,10 +42,21 @@ export class MainPageComponent implements OnInit {
   departureOrArrivalStation: boolean;
   showSearchDetails: boolean = false;
 
+  prop$ = this.translateService.onLangChange.pipe(
+    map(langChangeEvent => {
+      if (langChangeEvent.lang !== 'zh-TW'){
+       return 'eng站名'
+      } else {
+        return '站名'
+      }
+    })
+  )
+
   constructor(
     private requestService: RequestService,
     private stationInfoService: StationInfoService,
     private translateService: TranslateService,
+    private trainRouteDetails: TrainRouteDetailsService,
     private _adapter: DateAdapter<any>
   ) { }
 
@@ -92,12 +106,24 @@ export class MainPageComponent implements OnInit {
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
+  stopSearching() {
+    this.showSearchDetails = false;
+  }
+
   discard() {
     this.arrivalStation = undefined;
     this.departureStation = undefined;
   }
 
-  stopSearching() {
-    this.showSearchDetails = false;
+  confirm(){
+    this.trainRouteDetails.init(this.departureStation, this.arrivalStation, this.buildTheInformationForTheTrainRecords());
+
   }
+
+  buildTheInformationForTheTrainRecords() : TimeDetails {
+    let date = moment(this.date).locale('en').format('YYYYMMDD');
+    let time = moment(this.timeStamp).format('HH:mm');
+    return {date, time};
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { StationInfoService } from "../../service/station-info.service";
+import {map, startWith} from "rxjs/operators";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-station-search',
@@ -16,7 +18,20 @@ export class StationSearchComponent implements OnInit {
   listOfCounties: any;
   selectedStation: Station;
 
-  constructor(private stationInfoService: StationInfoService) { }
+  prop$ = this.translateService.onLangChange.pipe(
+    map(langChangeEvent => {
+      if (langChangeEvent.lang !== 'zh-TW'){
+        return 'eng站名'
+      } else {
+        return '站名'
+      }
+    }),
+    startWith('eng站名')
+  )
+
+  constructor(private stationInfoService: StationInfoService,
+              private translateService: TranslateService,
+  ) { }
 
   ngOnInit() {
     this.listOfPossibleStations = this.stationInfoService.getFilterStation();
