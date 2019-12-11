@@ -16,11 +16,6 @@ export class StateStationService {
   private arrivalStationSource = new BehaviorSubject<Station>(null as any);
   public arrivalStation = this.arrivalStationSource.asObservable();
 
-  private _pureStationList: Station[];
-  private _filteredStationList: Station[];
-
-  constructor() { }
-
   public updateStationInfoService(stationInfo: any): void{
     this.stationInfoSource.next(stationInfo);
   }
@@ -33,8 +28,14 @@ export class StateStationService {
     this.arrivalStationSource.next(station);
   }
 
+
+  // need to clean up when state manager is complete
+  private stationInfoS: any;
+  private _pureStationList: Station[];
+  private _filteredStationList: Station[];
+
   public initService(stationInfo: any){
-    this.stationInfoSource.next(stationInfo);
+    this.stationInfoS.next(stationInfo);
     this._pureStationList = stationInfo.stations;
   }
 
