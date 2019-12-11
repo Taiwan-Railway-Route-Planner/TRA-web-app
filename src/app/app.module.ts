@@ -20,6 +20,7 @@ import { TranslateStationPipe } from './pipe/translate-station.pipe';
 import { TranslateCountyPipe } from './pipe/translate-county.pipe';
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TrainOverviewComponent } from './train-overview/train-overview.component';
+import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TrainOverviewComponent } from './train-overview/train-overview.componen
     StationSearchComponent,
     TranslateCountyPipe,
     TrainOverviewComponent,
+    TranslateObjectPropsPipe,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { TrainOverviewComponent } from './train-overview/train-overview.componen
       }
     }),
     FormsModule,
-    NgxMaterialTimepickerModule
+    // NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
