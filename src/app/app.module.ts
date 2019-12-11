@@ -51,7 +51,7 @@ import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
       }
     }),
     FormsModule,
-    // NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
