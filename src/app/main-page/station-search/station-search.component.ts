@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
-import { StationInfoService } from "../../service/station-info.service";
+import { StateStationService } from "../../service/stateStation.service";
 import {map, startWith} from "rxjs/operators";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -29,7 +29,7 @@ export class StationSearchComponent implements OnInit {
     startWith('eng站名')
   )
 
-  constructor(private stationInfoService: StationInfoService,
+  constructor(private stationInfoService: StateStationService,
               private translateService: TranslateService,
   ) { }
 

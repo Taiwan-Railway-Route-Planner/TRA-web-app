@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
-import { StationInfoService } from "../service/station-info.service";
+import { StateStationService } from "../service/stateStation.service";
 import { TrainRouteDetailsService } from "../service/train-route-details.service";
 import { Station } from '../class/station';
 
@@ -13,7 +13,8 @@ import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 // import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TimeDetails} from "../class/timeDetails";
-import {map} from "rxjs/operators";
+import {map, startWith} from "rxjs/operators";
+import {combineLatest, Subject} from "rxjs";
 
 const moment = _rollupMoment || _moment;
 
@@ -49,12 +50,20 @@ export class MainPageComponent implements OnInit {
       } else {
         return '站名'
       }
+    }),
+    startWith('eng站名')
+  );
+  data$ = new Subject()
+  com$ = combineLatest(this.prop$, this.data$).pipe(
+    map(([prop, data]) =>  {
+
+      return {data,prop};
     })
   )
 
   constructor(
     private requestService: RequestService,
-    private stationInfoService: StationInfoService,
+    private stationInfoService: StateStationService,
     private translateService: TranslateService,
     private trainRouteDetails: TrainRouteDetailsService,
     private _adapter: DateAdapter<any>
