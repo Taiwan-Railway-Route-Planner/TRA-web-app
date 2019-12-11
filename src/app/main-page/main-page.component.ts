@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
 import { StateStationService } from "../service/stateStation.service";
 import { Station } from '../class/station';
-
 import { FormControl } from '@angular/forms';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -39,6 +38,7 @@ export class MainPageComponent implements OnInit {
   departureOrArrivalStation: boolean;
   showSearchDetails: boolean = false;
   prop$;
+  stationInfo$;
 
   constructor(
     private requestService: RequestService,
@@ -65,6 +65,8 @@ export class MainPageComponent implements OnInit {
       }),
     );
 
+    this.stationInfo$ = this.state.stationInfo;
+
     let _self = this;
 
     combineLatest(this.state.departureStation, this.state.arrivalStation)
@@ -79,6 +81,7 @@ export class MainPageComponent implements OnInit {
   openStationList(departureOrArrivalStation: boolean): void{
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
+    console.log(this.departureOrArrivalStation);
   }
 
   stopSearching() {
@@ -100,4 +103,13 @@ export class MainPageComponent implements OnInit {
     return {date, time};
   }
 
+  saveDepartureStation(station: Station) {
+    this.state.updateDepartureStation(station);
+    this.departureOrArrivalStation = !this.departureOrArrivalStation;
+  }
+
+  saveArrivalStation(station: Station) {
+    this.state.updateArrivalStation(station);
+    this.departureOrArrivalStation = !this.departureOrArrivalStation;
+  }
 }
