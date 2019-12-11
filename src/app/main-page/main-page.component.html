@@ -6,14 +6,14 @@
         <div class="station-input-element" (click)="openStationList(true)">
           <p>{{ 'select.routeDetails.departure.label' | translate}}:</p>
           <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation && (departureStation[(prop$|async)]) +' ('+ departureStation?.traWebsiteCode +')'"/>
+            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation | translateObjectProps: (prop$ | async)  +' ('+ departureStation?.traWebsiteCode +')'"/>
           </mat-form-field>
         </div>
 
         <div class="station-input-element" (click)="openStationList(false)">
           <p>{{ 'select.routeDetails.arrival.label' | translate }}:</p>
           <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation && (arrivalStation[(prop$|async)]) +' ('+ arrivalStation?.traWebsiteCode +')'"/>
+            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation | translateObjectProps: (prop$ | async) +' ('+ arrivalStation?.traWebsiteCode +')'"/>
           </mat-form-field>
         </div>
 
