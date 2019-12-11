@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
+import { ReplaySubject } from "rxjs";
 import { Station } from "../class/station";
-import { BehaviorSubject } from "rxjs";
-import {TimeDetails} from "../class/timeDetails";
+import { TimeDetails } from "../class/timeDetails";
+import { County } from "../class/county";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateStationService {
 
-  private stationInfo$ = new BehaviorSubject<any>(1);
+  private stationInfo$ = new ReplaySubject<any>(1);
   public stationInfo = this.stationInfo$.asObservable();
 
-  private destinationStation$ = new BehaviorSubject<Station>(null as any);
+  private destinationStation$ = new ReplaySubject<Station>();
   public destinationStation = this.destinationStation$.asObservable();
 
-  private arrivalStation$ = new BehaviorSubject<Station>(null as any);
+  private arrivalStation$ = new ReplaySubject<Station>();
   public arrivalStation = this.arrivalStation$.asObservable();
 
-  private timeDetails$ = new BehaviorSubject<TimeDetails>(null as any);
+  private timeDetails$ = new ReplaySubject<TimeDetails>();
   public timeDetails = this.timeDetails$.asObservable();
 
   public updateStationInfoService(stationInfo: any): void{
@@ -44,8 +45,12 @@ export class StateStationService {
   private _filteredStationList: Station[];
 
   public initService(stationInfo: any){
-    this.stationInfoS.next(stationInfo);
+    this.stationInfoS = (stationInfo);
     this._pureStationList = stationInfo.stations;
+  }
+
+  public getCounties(): County[]{
+    return this.stationInfoS.counties;
   }
 
   getFilterStation(): Station[] {
