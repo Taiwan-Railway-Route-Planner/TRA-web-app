@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { StateStationService } from "../../service/stateStation.service";
 import { TranslateService } from "@ngx-translate/core";
-import {map, startWith, tap} from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 
 @Component({
   selector: 'app-station-search',
