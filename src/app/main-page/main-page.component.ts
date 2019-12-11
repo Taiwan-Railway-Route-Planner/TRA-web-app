@@ -13,8 +13,8 @@ import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 // import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TimeDetails} from "../class/timeDetails";
-import {map, startWith} from "rxjs/operators";
-import {combineLatest, Subject} from "rxjs";
+import { map, startWith } from "rxjs/operators";
+import { combineLatest, Subject } from "rxjs";
 
 const moment = _rollupMoment || _moment;
 
