@@ -12,7 +12,8 @@ import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 import { TimeDetails} from "../class/timeDetails";
-import {map, shareReplay, startWith} from "rxjs/operators";
+import {map, shareReplay, startWith, tap} from "rxjs/operators";
+import {combineLatest, concat} from "rxjs";
 
 const moment = _rollupMoment || _moment;
 
@@ -34,8 +35,6 @@ export class MainPageComponent implements OnInit {
   date = new FormControl(moment());
   timeStamp = moment().format('LT');
 
-  stationInfo: any;
-  stationList: Station[];
   departureStation: Station;
   arrivalStation: Station;
   departureOrArrivalStation: boolean;
@@ -72,15 +71,11 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.getStationList();
-    // this._adapter.setLocale(this.translateService.currentLang);
-
+    this.requestService.getStation().subscribe(stationInfo => this.state.updateStationInfoService(stationInfo));
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this._adapter.setLocale(event.lang);
     });
-
-    this.requestService.getStation().subscribe(stationInfo => this.state.updateStationInfoService(stationInfo));
 
     this.prop$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
@@ -92,6 +87,15 @@ export class MainPageComponent implements OnInit {
         }
       }),
     );
+
+    let _self = this;
+
+    combineLatest(this.state.departureStation, this.state.arrivalStation)
+    .subscribe(function ([departure, arrival]) {
+      _self.showSearchDetails = false;
+      _self.arrivalStation = arrival;
+      _self.departureStation = departure;
+    });
 
   }
 
@@ -115,19 +119,19 @@ export class MainPageComponent implements OnInit {
   //   });
   // }
 
-  updateStation($event: Station){
-    // if (this.departureOrArrivalStation){
-    //   this.state.updateDestinationStation($event);
-    //   if (this.arrivalStation !== undefined){
-    //     this.showSearchDetails = false;
-    //   }
-    // } else {
-    //   this.state.updateArrivalStation($event);
-    //   this.showSearchDetails = false;
-    // }
-    // this.state.updateFilterStation(!this.departureOrArrivalStation? this.arrivalStation : this.departureStation);
-    // this.departureOrArrivalStation = !this.departureOrArrivalStation;
-  }
+  // updateStation($event: Station){
+  //   // if (this.departureOrArrivalStation){
+  //   //   this.state.updateDestinationStation($event);
+  //   //   if (this.arrivalStation !== undefined){
+  //   //     this.showSearchDetails = false;
+  //   //   }
+  //   // } else {
+  //   //   this.state.updateArrivalStation($event);
+  //   //   this.showSearchDetails = false;
+  //   // }
+  //   // this.state.updateFilterStation(!this.departureOrArrivalStation? this.arrivalStation : this.departureStation);
+  //   // this.departureOrArrivalStation = !this.departureOrArrivalStation;
+  // }
 
   stopSearching() {
     this.showSearchDetails = false;
