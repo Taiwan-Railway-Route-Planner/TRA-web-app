@@ -37,34 +37,4 @@ export class StateStationService {
   public updateTimeDetails(timeDetails: TimeDetails): void {
     this.timeDetails$.next(timeDetails);
   }
-
-
-
-  // need to clean up when state manager is complete
-  private stationInfoS: any;
-  private _pureStationList: Station[];
-  private _filteredStationList: Station[];
-
-  public initService(stationInfo: any){
-    this.stationInfoS = (stationInfo);
-    this._pureStationList = stationInfo.stations;
-  }
-
-  public getCounties(): County[]{
-    return this.stationInfoS.counties;
-  }
-
-  getFilterStation(): Station[] {
-    return this._filteredStationList;
-  }
-
-  updateFilterStation(stationToFilter: Station): void {
-    if (stationToFilter !== undefined){
-      this._filteredStationList = this._pureStationList.filter(station => station.時刻表編號 !== stationToFilter.時刻表編號);
-    } else {
-      this._filteredStationList = this._pureStationList;
-    }
-  }
-
-
 }

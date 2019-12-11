@@ -15,21 +15,8 @@ export class StationSearchComponent implements OnInit {
   @Output() stopEvent = new EventEmitter();
 
   selectedStation: Station;
-
+  prop$;
   stationInfo$;
-
-  prop$ = this.translateService.onLangChange.pipe(
-    startWith({lang: this.translateService.currentLang}),
-    map(langChangeEvent => {
-      if (langChangeEvent.lang !== 'zh-TW'){
-        // return ['eng縣市', 'eng站名']
-        return 'eng縣市'
-      } else {
-        // return ['縣市', '站名']
-        return '縣市'
-      }
-    }),
-  );
 
 
   constructor(
@@ -39,6 +26,19 @@ export class StationSearchComponent implements OnInit {
 
   ngOnInit() {
     this.stationInfo$ = this.state.stationInfo;
+
+    this.prop$ = this.translateService.onLangChange.pipe(
+      startWith({lang: this.translateService.currentLang}),
+      map(langChangeEvent => {
+        if (langChangeEvent.lang !== 'zh-TW'){
+          // return ['eng縣市', 'eng站名']
+          return 'eng縣市'
+        } else {
+          // return ['縣市', '站名']
+          return '縣市'
+        }
+      }),
+    );
   }
 
   saveValues() {

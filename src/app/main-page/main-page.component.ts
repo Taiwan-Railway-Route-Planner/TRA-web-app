@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
 import { StateStationService } from "../service/stateStation.service";
-import { TrainRouteDetailsService } from "../service/train-route-details.service";
 import { Station } from '../class/station';
 
 import { FormControl } from '@angular/forms';
@@ -45,7 +44,6 @@ export class MainPageComponent implements OnInit {
     private requestService: RequestService,
     private state: StateStationService,
     private translateService: TranslateService,
-    private trainRouteDetails: TrainRouteDetailsService,
     private _adapter: DateAdapter<any>
   ) { }
 
@@ -93,7 +91,6 @@ export class MainPageComponent implements OnInit {
   }
 
   confirm(){
-    this.trainRouteDetails.init(this.departureStation, this.arrivalStation, this.buildTheInformationForTheTrainRecords());
 
   }
 
