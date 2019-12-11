@@ -18,8 +18,8 @@
       <div class="bubble">
         <i class="fas fa-globe-asia"></i>
       </div>
-      <div class="counties bubble" *ngFor="let county of listOfCounties">
-        {{ county | translateCounty }}
+      <div class="counties bubble" *ngFor="let county of (counties$ | async).counties">
+        {{ county | translateObjectProps: (prop$ | async) }}
       </div>
     </div>
   </div>
