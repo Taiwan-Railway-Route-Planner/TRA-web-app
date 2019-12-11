@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { StateStationService } from "../../service/stateStation.service";
-import {map, startWith} from "rxjs/operators";
-import {TranslateService} from "@ngx-translate/core";
+import { map, startWith } from "rxjs/operators";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-station-search',
@@ -27,20 +27,23 @@ export class StationSearchComponent implements OnInit {
       }
     }),
     startWith('eng站名')
-  )
+  );
 
-  constructor(private stationInfoService: StateStationService,
+
+
+  constructor(private state: StateStationService,
               private translateService: TranslateService,
   ) { }
 
   ngOnInit() {
-    this.listOfPossibleStations = this.stationInfoService.getFilterStation();
-    this.listOfCounties = this.stationInfoService.getCounties();
+    this.listOfPossibleStations = this.state.getFilterStation();
+    this.listOfCounties = this.state.getCounties();
+    this.state.stationInfo.subscribe(data => console.log(data));
   }
 
   emitSelectedStation() {
     this.selectedStationEvent.emit(this.selectedStation);
-    this.listOfPossibleStations = this.stationInfoService.getFilterStation();
+    this.listOfPossibleStations = this.state.getFilterStation();
     this.selectedStation = undefined;
   }
 
