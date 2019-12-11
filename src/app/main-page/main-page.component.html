@@ -1,5 +1,12 @@
 <div class="travelDetails">
-  <app-station-search *ngIf="showSearchDetails" [departureOrArrivalStation]="departureOrArrivalStation" class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
+  <ng-container *ngIf="showSearchDetails">
+    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation" [stationInfo]="stationInfo$ | async"
+                        (stationSelect)="saveDepartureStation($event)"
+                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
+    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation" [stationInfo]="stationInfo$ | async"
+                        (stationSelect)="saveArrivalStation($event)"
+                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
+  </ng-container>
   <mat-card class="example-card" *ngIf="!showSearchDetails">
     <mat-card-content>
       <div class="stationForm">
