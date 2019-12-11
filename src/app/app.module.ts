@@ -16,8 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './main-page/main-page.component';
 import { StationSearchComponent } from './main-page/station-search/station-search.component';
 
-import { TranslateStationPipe } from './pipe/translate-station.pipe';
-import { TranslateCountyPipe } from './pipe/translate-county.pipe';
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { TrainOverviewComponent } from './train-overview/train-overview.component';
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
@@ -26,9 +24,7 @@ import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
   declarations: [
     AppComponent,
     MainPageComponent,
-    TranslateStationPipe,
     StationSearchComponent,
-    TranslateCountyPipe,
     TrainOverviewComponent,
     TranslateObjectPropsPipe,
   ],
