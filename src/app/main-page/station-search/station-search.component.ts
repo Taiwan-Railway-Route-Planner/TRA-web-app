@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { StateStationService } from "../../service/stateStation.service";
 import { TranslateService } from "@ngx-translate/core";
-import { map, startWith } from "rxjs/operators";
+import {map, startWith, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-station-search',
@@ -12,24 +12,24 @@ import { map, startWith } from "rxjs/operators";
 export class StationSearchComponent implements OnInit {
 
   @Input() departureOrArrivalStation: boolean;
-  @Output() selectedStationEvent = new EventEmitter<Station>();
   @Output() stopEvent = new EventEmitter();
-  listOfPossibleStations: Station[];
-  // listOfCounties: any;
+
   selectedStation: Station;
 
-  counties$;
+  stationInfo$;
 
   prop$ = this.translateService.onLangChange.pipe(
     startWith({lang: this.translateService.currentLang}),
     map(langChangeEvent => {
       if (langChangeEvent.lang !== 'zh-TW'){
+        // return ['eng縣市', 'eng站名']
         return 'eng縣市'
       } else {
+        // return ['縣市', '站名']
         return '縣市'
       }
     }),
-  )
+  );
 
 
   constructor(
@@ -38,18 +38,17 @@ export class StationSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.counties$ = this.state.stationInfo;
-
-    this.listOfPossibleStations = this.state.getFilterStation();
-    // this.listOfCounties = this.state.getCounties();
-
-    this.translateService.onLangChange.subscribe(data => console.log(data));
+    this.stationInfo$ = this.state.stationInfo;
   }
 
-  emitSelectedStation() {
-    this.selectedStationEvent.emit(this.selectedStation);
-    this.listOfPossibleStations = this.state.getFilterStation();
+  saveValues() {
+    if (this.departureOrArrivalStation){
+      this.state.updateDepartureStation(this.selectedStation)
+    } else {
+      this.state.updateArrivalStation(this.selectedStation);
+    }
     this.selectedStation = undefined;
+    this.departureOrArrivalStation = !this.departureOrArrivalStation;
   }
 
   selectThisStation(selectedStation: Station){
