@@ -6,7 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TranslateObjectPropsPipe implements PipeTransform {
 
   transform(object: any, arg: string): string {
-    return object[arg];
+    if (object) {
+      return object[arg];
+    }
+    return ''
   }
 
 }
