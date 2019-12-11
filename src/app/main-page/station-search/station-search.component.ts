@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { StateStationService } from "../../service/stateStation.service";
-import { map, startWith } from "rxjs/operators";
 import { TranslateService } from "@ngx-translate/core";
+import { map, startWith } from "rxjs/operators";
 
 @Component({
   selector: 'app-station-search',
@@ -15,30 +15,35 @@ export class StationSearchComponent implements OnInit {
   @Output() selectedStationEvent = new EventEmitter<Station>();
   @Output() stopEvent = new EventEmitter();
   listOfPossibleStations: Station[];
-  listOfCounties: any;
+  // listOfCounties: any;
   selectedStation: Station;
 
+  counties$;
+
   prop$ = this.translateService.onLangChange.pipe(
+    startWith({lang: this.translateService.currentLang}),
     map(langChangeEvent => {
       if (langChangeEvent.lang !== 'zh-TW'){
-        return 'eng站名'
+        return 'eng縣市'
       } else {
-        return '站名'
+        return '縣市'
       }
     }),
-    startWith('eng站名')
-  );
+  )
 
 
-
-  constructor(private state: StateStationService,
-              private translateService: TranslateService,
+  constructor(
+    private state: StateStationService,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit() {
+    this.counties$ = this.state.stationInfo;
+
     this.listOfPossibleStations = this.state.getFilterStation();
-    this.listOfCounties = this.state.getCounties();
-    this.state.stationInfo.subscribe(data => console.log(data));
+    // this.listOfCounties = this.state.getCounties();
+
+    this.translateService.onLangChange.subscribe(data => console.log(data));
   }
 
   emitSelectedStation() {
