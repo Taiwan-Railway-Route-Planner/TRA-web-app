@@ -12,8 +12,8 @@ export class StateStationService {
   private stationInfo$ = new ReplaySubject<any>(1);
   public stationInfo = this.stationInfo$.asObservable();
 
-  private destinationStation$ = new ReplaySubject<Station>();
-  public destinationStation = this.destinationStation$.asObservable();
+  private departureStation$ = new ReplaySubject<Station>();
+  public departureStation = this.departureStation$.asObservable();
 
   private arrivalStation$ = new ReplaySubject<Station>();
   public arrivalStation = this.arrivalStation$.asObservable();
@@ -21,14 +21,13 @@ export class StateStationService {
   private timeDetails$ = new ReplaySubject<TimeDetails>();
   public timeDetails = this.timeDetails$.asObservable();
 
+
   public updateStationInfoService(stationInfo: any): void{
     this.stationInfo$.next(stationInfo);
-
-    this.initService(stationInfo);
   }
 
-  public updateDestinationStation(station: Station): void {
-    this.destinationStation$.next(station);
+  public updateDepartureStation(station: Station): void {
+    this.departureStation$.next(station);
   }
 
   public updateArrivalStation(station: Station): void {
