@@ -23,6 +23,8 @@ export class StateStationService {
 
   public updateStationInfoService(stationInfo: any): void{
     this.stationInfo$.next(stationInfo);
+
+    this.initService(stationInfo);
   }
 
   public updateDestinationStation(station: Station): void {
