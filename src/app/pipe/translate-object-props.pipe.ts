@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TranslateObjectPropsPipe implements PipeTransform {
 
-  transform(object: any, arg: string): string {
-    if (object) {
-      return object[arg];
+  transform(object: any, arg: string, optionalArg: string = ''): string {
+    if (object !== undefined) {
+      return optionalArg === ''? object[arg] : `${object[arg]} (${object[optionalArg]})`;
     }
     return ''
   }
