@@ -3,7 +3,8 @@
     <span>
       <i class="fas fa-search first"></i>
       <mat-form-field class="search-text">
-        <input type="string" matInput [placeholder]="placeholderLabel | translate" [ngModel]="(selectedStation | translateObjectProps: (propStation$ | async): 'traWebsiteCode')" autofocus>
+<!--        <input type="string" matInput [placeholder]="placeholderLabel | translate" [ngModel]="(selectedStation | translateObjectProps: (propStation$ | async): 'traWebsiteCode')" autofocus>-->
+        <input type="string" [formControl]="filterStation" matInput [placeholder]="placeholderLabel | translate" autofocus>
       </mat-form-field>
       <i class="far fa-times-circle" (click)="discard()"></i>
       <button class="button" [matTooltip]="'select.routeDetails.time.modal.bottom.rightBtn' | translate" matTooltipPosition="left" (click)="saveValues()">
@@ -24,7 +25,7 @@
   </div>
 
   <div class="listOfStations">
-    <p *ngFor="let station of stationInfo.stations" (click)="selectThisStation(station)">
+    <p *ngFor="let station of (stationList$ | async)" (click)="selectThisStation(station)">
       {{ (station | translateObjectProps: (propStation$ | async): 'traWebsiteCode') }}
     </p>
   </div>
