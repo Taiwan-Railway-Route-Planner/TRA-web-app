@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
-import {debounceTime, distinctUntilChanged, map, startWith } from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, map, startWith } from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import {combineLatest, of} from "rxjs";
+import { combineLatest, of} from "rxjs";
 
 @Component({
   selector: 'app-station-search',
@@ -20,7 +20,6 @@ export class StationSearchComponent implements OnInit {
   filterStation: FormControl = new FormControl('');
   filterStation$ = this.filterStation.valueChanges.pipe(startWith(''));
 
-
   selectedStation: Station;
   propStation$;
   propCounties$;
@@ -32,11 +31,10 @@ export class StationSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.propCounties$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW'){
+        if (langChangeEvent.lang !== 'zh-TW') {
           return 'eng縣市'
         } else {
           return '縣市'
@@ -47,7 +45,7 @@ export class StationSearchComponent implements OnInit {
     this.propStation$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW'){
+        if (langChangeEvent.lang !== 'zh-TW') {
           return 'eng站名'
         } else {
           return '站名'
@@ -58,14 +56,16 @@ export class StationSearchComponent implements OnInit {
     this.stationList$ = combineLatest(of(this.stationInfo.stations), this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(([stationList, searchTerm]) => stationList.filter(
-        station =>
-          station['eng站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-          ||
-          station['站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-          ||
-          station['traWebsiteCode'].indexOf(searchTerm) !== -1
-      ))
+      map(function ([stationList, searchTerm]) {
+        return stationList.filter(
+          station =>
+            station['eng站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            ||
+            station['站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            ||
+            station['traWebsiteCode'].indexOf(searchTerm) !== -1
+        )
+      })
     );
   }
 
@@ -73,9 +73,9 @@ export class StationSearchComponent implements OnInit {
     this.stationSelect.emit(this.selectedStation);
   }
 
-  selectThisStation(selectedStation: Station){
+  selectThisStation(selectedStation: Station) {
     this.selectedStation = selectedStation;
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   discard() {
