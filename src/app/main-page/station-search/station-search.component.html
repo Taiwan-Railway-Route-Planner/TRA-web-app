@@ -3,7 +3,6 @@
     <span>
       <i class="fas fa-search first"></i>
       <mat-form-field class="search-text">
-<!--        <input type="string" (ngModelChange)="search()" matInput [placeholder]="placeholderLabel | translate" [ngModel]="(selectedStation | translateObjectProps: (propStation$ | async): 'traWebsiteCode')" autofocus>-->
         <input type="string" [formControl]="filterStation" matInput [placeholder]="placeholderLabel | translate" autofocus>
       </mat-form-field>
       <i class="far fa-times-circle" (click)="discard()"></i>
