@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
-import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
+import { debounceTime, distinctUntilChanged, map, startWith, take, tap } from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import { combineLatest, of} from "rxjs";
+import { combineLatest, of, fromEvent } from "rxjs";
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe
   templateUrl: './station-search.component.html',
   styleUrls: ['./station-search.component.sass']
 })
-export class StationSearchComponent implements OnInit {
+export class StationSearchComponent implements OnInit, AfterViewInit {
 
   @Input() placeholderLabel: string;
   @Input() stationInfo: any;
@@ -20,6 +20,8 @@ export class StationSearchComponent implements OnInit {
 
   filterStation: FormControl = new FormControl('');
   filterStation$ = this.filterStation.valueChanges.pipe(startWith(''));
+
+ // @ViewChild('selectCounty', {static: false}) selectCounty: ElementRef;
 
   selectedStation: Station;
   propStation$;
@@ -70,6 +72,12 @@ export class StationSearchComponent implements OnInit {
         )
       })
     );
+  }
+
+  ngAfterViewInit(): void {
+    // let selectedCounty$ = fromEvent(this.selectCounty.nativeElement, 'click').pipe(
+    //   tap(x => console.log(x))
+    // ).subscribe(x => console.log(x))
   }
 
   saveValues() {

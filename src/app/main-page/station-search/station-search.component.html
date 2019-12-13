@@ -17,7 +17,7 @@
       <div class="bubble">
         <i class="fas fa-globe-asia"></i>
       </div>
-      <div class="counties bubble" *ngFor="let county of stationInfo.counties">
+      <div class="counties bubble" #selectCounty *ngFor="let county of stationInfo.counties">
         {{ county | translateObjectProps: (propCounties$ | async) }}
       </div>
     </div>
