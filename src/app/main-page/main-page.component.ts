@@ -81,7 +81,6 @@ export class MainPageComponent implements OnInit {
   openStationList(departureOrArrivalStation: boolean): void{
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
-    console.log(this.departureOrArrivalStation);
   }
 
   stopSearching() {
