@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
-import { debounceTime, distinctUntilChanged, map, startWith } from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
 import { FormControl } from "@angular/forms";
 import { combineLatest, of} from "rxjs";
+import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
 
 @Component({
   selector: 'app-station-search',
@@ -27,7 +28,8 @@ export class StationSearchComponent implements OnInit {
 
 
   constructor(
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private translateObjectPropsPipe: TranslateObjectPropsPipe
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class StationSearchComponent implements OnInit {
         } else {
           return '縣市'
         }
-      }),
+      })
     );
 
     this.propStation$ = this.translateService.onLangChange.pipe(
@@ -51,6 +53,7 @@ export class StationSearchComponent implements OnInit {
           return '站名'
         }
       }),
+      tap(stationNameProp => this.updateStationMessage(stationNameProp)),
     );
 
     this.stationList$ = combineLatest(of(this.stationInfo.stations), this.filterStation$).pipe(
@@ -76,6 +79,15 @@ export class StationSearchComponent implements OnInit {
   selectThisStation(selectedStation: Station) {
     this.selectedStation = selectedStation;
     window.scrollTo(0, 0);
+    this.propStation$.subscribe(
+      stationPropName => this.updateStationMessage(stationPropName),
+      take(1)
+    )
+  }
+
+  updateStationMessage(stationNameProp: string ='') : void {
+    let stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp  , 'traWebsiteCode');
+    this.filterStation = new FormControl(stationMessage);
   }
 
   discard() {
