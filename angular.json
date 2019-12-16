@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/theme.less",
               "src/custom-theme.scss",
               "src/styles.sass"
             ],
