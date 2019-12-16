@@ -95,7 +95,7 @@ export class StationSearchComponent implements OnInit, AfterViewInit {
 
   updateStationMessage(stationNameProp: string ='') : void {
     let stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp  , 'traWebsiteCode');
-    this.filterStation = new FormControl(stationMessage);
+    this.filterStation.setValue(stationMessage);
   }
 
   discard() {
