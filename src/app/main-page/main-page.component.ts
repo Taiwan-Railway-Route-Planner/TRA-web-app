@@ -3,8 +3,8 @@ import { RequestService } from '../service/request.service';
 import { StateStationService } from "../service/stateStation.service";
 import { Station } from '../class/station';
 import { FormControl } from '@angular/forms';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+// import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
@@ -20,12 +20,12 @@ const moment = _rollupMoment || _moment;
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.sass'],
   providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
-    },
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
+    // {
+    //   provide: DateAdapter,
+    //   useClass: MomentDateAdapter,
+    //   deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    // },
+    // {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
 })
 export class MainPageComponent implements OnInit {
@@ -44,14 +44,14 @@ export class MainPageComponent implements OnInit {
     private requestService: RequestService,
     private state: StateStationService,
     private translateService: TranslateService,
-    private _adapter: DateAdapter<any>
+    // private _adapter: DateAdapter<any>
   ) { }
 
   ngOnInit() {
     this.requestService.getStation().subscribe(stationInfo => this.state.updateStationInfoService(stationInfo));
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      this._adapter.setLocale(event.lang);
+      // this._adapter.setLocale(event.lang);
     });
 
     this.prop$ = this.translateService.onLangChange.pipe(

@@ -1,11 +1,11 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span class="toolbar-title">{{ title }}</span>
-    <span class="example-spacer"></span>
-    <form [formGroup]="form" class="smaller-i18n-form">
-      <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-    </form>
-  </mat-toolbar-row>
-</mat-toolbar>
+<nz-page-header nzTitle="Page Title">
+  <nz-page-header-title>
+    {{ title }}
+  </nz-page-header-title>
+  <span class="example-spacer"></span>
+  <form [formGroup]="form" class="smaller-i18n-form">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+  </form>
+</nz-page-header>
 
-<router-outlet></router-outlet>
+<!--<router-outlet></router-outlet>-->
