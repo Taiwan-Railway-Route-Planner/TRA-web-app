@@ -3,7 +3,7 @@ import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
 import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import { combineLatest, of, Observable } from "rxjs";
+import { combineLatest, Observable, ReplaySubject } from "rxjs";
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
 import { County } from "../../class/county";
 
@@ -26,7 +26,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
   selectedCounty: County;
   propStation$: Observable<string>;
   propCounties$: Observable<string>;
-  filteredStationList: Station[];
+  filteredStationList = new ReplaySubject<any>(1);
   stationList$: Observable<Station>;
   stationList: Station[];
   countyList: County[];
@@ -41,8 +41,8 @@ export class StationSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.countyList = this.stationInfo.counties;
     this.filteredCountyList = this.countyList;
-    this.stationList = this.stationInfo.station;
-    this.filteredStationList = this.stationList;
+    this.stationList = this.stationInfo.stations;
+    this.filteredStationList.next(this.stationList);
 
     this.propCounties$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
@@ -71,7 +71,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
       this.updateStationMessage(stationNameProp)
     });
 
-    this.stationList$ = combineLatest(of(this.filteredStationList), this.filterStation$).pipe(
+    this.stationList$ = combineLatest(this.filteredStationList, this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map(function ([stationList, searchTerm]) {
@@ -89,12 +89,14 @@ export class StationSearchComponent implements OnInit, OnDestroy {
 
   activatedCounty(county: County): void {
     this.filteredCountyList = this.countyList.filter(cy => cy.eng縣市 !== county.eng縣市);
+    this.filteredStationList.next(this.stationList.filter(cy => cy.eng縣市 === county.eng縣市));
     this.selectedCounty = county;
     this.globalAsiaClass = 'counties bubble';
   }
 
   activatedGlobe() {
     this.filteredCountyList = this.countyList;
+    this.filteredStationList.next(this.stationList);
     this.selectedCounty = undefined;
     this.globalAsiaClass = 'bubble';
   }
