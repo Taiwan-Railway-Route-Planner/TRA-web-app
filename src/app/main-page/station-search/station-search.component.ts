@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
-import { debounceTime, distinctUntilChanged, map, startWith, take, tap } from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import { combineLatest, of, fromEvent } from "rxjs";
+import {combineLatest, of, fromEvent, Observable} from "rxjs";
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe
   templateUrl: './station-search.component.html',
   styleUrls: ['./station-search.component.sass']
 })
-export class StationSearchComponent implements OnInit, AfterViewInit {
+export class StationSearchComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() placeholderLabel: string;
   @Input() stationInfo: any;
@@ -21,12 +21,11 @@ export class StationSearchComponent implements OnInit, AfterViewInit {
   filterStation: FormControl = new FormControl('');
   filterStation$ = this.filterStation.valueChanges.pipe(startWith(''));
 
- // @ViewChild('selectCounty', {static: false}) selectCounty: ElementRef;
-
   selectedStation: Station;
-  propStation$;
-  propCounties$;
-  stationList$;
+  propStation$: Observable<string>;
+  propCounties$: Observable<string>;
+  stationList$: Observable<Station>;
+  valueTest: string = 'te';
 
 
   constructor(
@@ -55,8 +54,12 @@ export class StationSearchComponent implements OnInit, AfterViewInit {
           return '站名'
         }
       }),
-      tap(stationNameProp => this.updateStationMessage(stationNameProp)),
+      shareReplay(1),
     );
+
+    this.propStation$.subscribe(stationNameProp => {
+      this.updateStationMessage(stationNameProp)
+    });
 
     this.stationList$ = combineLatest(of(this.stationInfo.stations), this.filterStation$).pipe(
       debounceTime(200),
@@ -70,7 +73,7 @@ export class StationSearchComponent implements OnInit, AfterViewInit {
             ||
             station['traWebsiteCode'].indexOf(searchTerm) !== -1
         )
-      })
+      }),
     );
   }
 
@@ -94,11 +97,15 @@ export class StationSearchComponent implements OnInit, AfterViewInit {
   }
 
   updateStationMessage(stationNameProp: string ='') : void {
-    let stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp  , 'traWebsiteCode');
+    let stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp, 'traWebsiteCode');
     this.filterStation.setValue(stationMessage);
   }
 
   discard() {
     this.stopEvent.emit();
+  }
+
+  ngOnDestroy() {
+    this.propStation$.subscribe();
   }
 }

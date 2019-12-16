@@ -23,9 +23,9 @@
     </div>
   </div>
 
-  <div class="listOfStations">
+  <div class="listOfStations" *ngIf="(propStation$ | async) as propStation">
     <p *ngFor="let station of (stationList$ | async)" (click)="selectThisStation(station)">
-      {{ (station | translateObjectProps: (propStation$ | async): 'traWebsiteCode') }}
+      {{ (station | translateObjectProps: propStation: 'traWebsiteCode') }}
     </p>
   </div>
 
