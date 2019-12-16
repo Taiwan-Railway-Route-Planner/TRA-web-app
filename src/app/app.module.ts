@@ -2,33 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { StationSearchComponent } from './main-page/station-search/station-search.component';
+import { TrainOverviewComponent } from './train-overview/train-overview.component';
 
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainPageComponent } from './main-page/main-page.component';
-import { StationSearchComponent } from './main-page/station-search/station-search.component';
-
-import { TranslateStationPipe } from './pipe/translate-station.pipe';
-import { TranslateCountyPipe } from './pipe/translate-county.pipe';
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
-import { TrainOverviewComponent } from './train-overview/train-overview.component';
+
+import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    TranslateStationPipe,
     StationSearchComponent,
-    TranslateCountyPipe,
     TrainOverviewComponent,
+    TranslateObjectPropsPipe,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +48,9 @@ import { TrainOverviewComponent } from './train-overview/train-overview.componen
     FormsModule,
     NgxMaterialTimepickerModule
   ],
-  providers: [],
+  providers: [
+    TranslateObjectPropsPipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

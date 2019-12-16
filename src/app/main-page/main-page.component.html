@@ -1,19 +1,26 @@
 <div class="travelDetails">
-  <app-station-search *ngIf="showSearchDetails" [departureOrArrivalStation]="departureOrArrivalStation" class="stationSearchContainer" (stopEvent)="stopSearching()" (selectedStationEvent)="updateStation($event)"></app-station-search>
+  <ng-container *ngIf="showSearchDetails">
+    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation" [stationInfo]="stationInfo$ | async"
+                        (stationSelect)="saveDepartureStation($event)"
+                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
+    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation" [stationInfo]="stationInfo$ | async"
+                        (stationSelect)="saveArrivalStation($event)"
+                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
+  </ng-container>
   <mat-card class="example-card" *ngIf="!showSearchDetails">
     <mat-card-content>
       <div class="stationForm">
         <div class="station-input-element" (click)="openStationList(true)">
           <p>{{ 'select.routeDetails.departure.label' | translate}}:</p>
           <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="departureStation && (departureStation[(prop$|async)]) +' ('+ departureStation?.traWebsiteCode +')'"/>
+            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="(departureStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>
           </mat-form-field>
         </div>
 
         <div class="station-input-element" (click)="openStationList(false)">
           <p>{{ 'select.routeDetails.arrival.label' | translate }}:</p>
           <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="arrivalStation && (arrivalStation[(prop$|async)]) +' ('+ arrivalStation?.traWebsiteCode +')'"/>
+            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="(arrivalStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>
           </mat-form-field>
         </div>
 

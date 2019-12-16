@@ -3,30 +3,32 @@
     <span>
       <i class="fas fa-search first"></i>
       <mat-form-field class="search-text">
-        <input *ngIf="departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.startStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
-        <input *ngIf="!departureOrArrivalStation" type="string" matInput placeholder="{{ 'select.searchBar.hintText.endStation' | translate }}" [ngModel]="selectedStation | translateStation" autofocus>
+        <input type="string" [formControl]="filterStation" matInput [placeholder]="placeholderLabel | translate" autofocus>
       </mat-form-field>
       <i class="far fa-times-circle" (click)="discard()"></i>
-      <button class="button" matTooltip="{{ 'select.routeDetails.time.modal.bottom.rightBtn' | translate }}" matTooltipPosition="left" (click)="emitSelectedStation()">
+      <button class="button" [matTooltip]="'select.routeDetails.time.modal.bottom.rightBtn' | translate" matTooltipPosition="left" (click)="saveValues()">
         <i class="fas fa-arrow-right second"></i>
       </button>
     </span>
   </div>
 
   <div class="scroll-class">
-    <div class="countiesFilter">
-      <div class="bubble">
+    <div class="countiesFilter" *ngIf="(propCounties$ | async) as propsCounties">
+      <div class="bubble" *ngIf="selectedCounty">
+        {{ selectedCounty | translateObjectProps: propsCounties }}
+      </div>
+      <div [class]="globalAsiaClass" (click)="activatedGlobe()">
         <i class="fas fa-globe-asia"></i>
       </div>
-      <div class="counties bubble" *ngFor="let county of listOfCounties">
-        {{ county | translateCounty }}
+      <div class="counties bubble" (click)="activatedCounty(county)" *ngFor="let county of filteredCountyList">
+        {{ county | translateObjectProps: propsCounties }}
       </div>
     </div>
   </div>
 
-  <div class="listOfStations">
-    <p *ngFor="let station of listOfPossibleStations" (click)="selectThisStation(station)">
-      {{ (station[(prop$|async)]) +' ('+ station?.traWebsiteCode +')' }}
+  <div class="listOfStations" *ngIf="(propStation$ | async) as propStation">
+    <p *ngFor="let station of (stationList$ | async)" (click)="selectThisStation(station)">
+      {{ (station | translateObjectProps: propStation: 'traWebsiteCode') }}
     </p>
   </div>
 
