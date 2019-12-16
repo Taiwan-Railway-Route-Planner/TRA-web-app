@@ -1,53 +1,53 @@
-<div class="travelDetails">
-  <ng-container *ngIf="showSearchDetails">
-    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation" [stationInfo]="stationInfo$ | async"
-                        (stationSelect)="saveDepartureStation($event)"
-                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
-    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation" [stationInfo]="stationInfo$ | async"
-                        (stationSelect)="saveArrivalStation($event)"
-                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
-  </ng-container>
-  <mat-card class="example-card" *ngIf="!showSearchDetails">
-    <mat-card-content>
-      <div class="stationForm">
-        <div class="station-input-element" (click)="openStationList(true)">
-          <p>{{ 'select.routeDetails.departure.label' | translate}}:</p>
-          <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="(departureStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>
-          </mat-form-field>
-        </div>
+<!--<div class="travelDetails">-->
+<!--  <ng-container *ngIf="showSearchDetails">-->
+<!--    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation" [stationInfo]="stationInfo$ | async"-->
+<!--                        (stationSelect)="saveDepartureStation($event)"-->
+<!--                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>-->
+<!--    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation" [stationInfo]="stationInfo$ | async"-->
+<!--                        (stationSelect)="saveArrivalStation($event)"-->
+<!--                        class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>-->
+<!--  </ng-container>-->
+<!--  <mat-card class="example-card" *ngIf="!showSearchDetails">-->
+<!--    <mat-card-content>-->
+<!--      <div class="stationForm">-->
+<!--        <div class="station-input-element" (click)="openStationList(true)">-->
+<!--          <p>{{ 'select.routeDetails.departure.label' | translate}}:</p>-->
+<!--          <mat-form-field>-->
+<!--            <input matInput placeholder="{{ 'select.routeDetails.departure.hint' | translate }}" [ngModel]="(departureStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
 
-        <div class="station-input-element" (click)="openStationList(false)">
-          <p>{{ 'select.routeDetails.arrival.label' | translate }}:</p>
-          <mat-form-field>
-            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="(arrivalStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>
-          </mat-form-field>
-        </div>
+<!--        <div class="station-input-element" (click)="openStationList(false)">-->
+<!--          <p>{{ 'select.routeDetails.arrival.label' | translate }}:</p>-->
+<!--          <mat-form-field>-->
+<!--            <input matInput placeholder="{{ 'select.routeDetails.arrival.hint' | translate }}" [ngModel]="(arrivalStation | translateObjectProps: (prop$ | async): 'traWebsiteCode')"/>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
 
-        <div class="time-information">
-          <p class="time-title-info">{{ 'select.routeDetails.time.label' | translate }}:</p>
-          <mat-form-field class="date-picker">
-            <input matInput [matDatepicker]="picker" [formControl]="date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #picker></mat-datepicker>
-          </mat-form-field>
-          <div class="time-picker">
-            <mat-form-field>
-              <input matInput [ngxTimepicker]="defaultValue" [value]="timeStamp">
-              <ngx-material-timepicker #defaultValue></ngx-material-timepicker>
-            </mat-form-field>
-          </div>
-        </div>
-
-
-      </div>
-    </mat-card-content>
+<!--        <div class="time-information">-->
+<!--          <p class="time-title-info">{{ 'select.routeDetails.time.label' | translate }}:</p>-->
+<!--          <mat-form-field class="date-picker">-->
+<!--            <input matInput [matDatepicker]="picker" [formControl]="date">-->
+<!--            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--            <mat-datepicker touchUi #picker></mat-datepicker>-->
+<!--          </mat-form-field>-->
+<!--          <div class="time-picker">-->
+<!--            <mat-form-field>-->
+<!--              <input matInput [ngxTimepicker]="defaultValue" [value]="timeStamp">-->
+<!--              <ngx-material-timepicker #defaultValue></ngx-material-timepicker>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
+<!--        </div>-->
 
 
+<!--      </div>-->
+<!--    </mat-card-content>-->
 
-    <mat-card-actions>
-      <button color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>
-      <button (click)="discard()" color="primary" mat-raised-button>{{ 'select.routeDetails.time.modal.bottom.leftBtn' | translate }}</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+
+
+<!--    <mat-card-actions>-->
+<!--      <button color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>-->
+<!--      <button (click)="discard()" color="primary" mat-raised-button>{{ 'select.routeDetails.time.modal.bottom.leftBtn' | translate }}</button>-->
+<!--    </mat-card-actions>-->
+<!--  </mat-card>-->
+<!--</div>-->

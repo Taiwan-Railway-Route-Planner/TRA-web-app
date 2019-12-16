@@ -12,12 +12,16 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
-import { MaterialModule } from './materialDesign';
+import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
+import { NgZorroModule } from './ngZorro';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
+import { NgZorroAntdModule, NZ_I18N, en_GB } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
   declarations: [
@@ -30,11 +34,11 @@ import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule,
+    NgZorroModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormlyModule.forRoot(),
-    FormlyMaterialModule,
+    FormlyNgZorroAntdModule,
 
     // ngx-translate and the loader module
     HttpClientModule,
@@ -46,10 +50,11 @@ import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
       }
     }),
     FormsModule,
-    NgxMaterialTimepickerModule
+    NgZorroAntdModule
   ],
   providers: [
     TranslateObjectPropsPipe,
+    { provide: NZ_I18N, useValue: en_GB },
   ],
   bootstrap: [AppComponent]
 })
