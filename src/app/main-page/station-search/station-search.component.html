@@ -13,12 +13,15 @@
   </div>
 
   <div class="scroll-class">
-    <div class="countiesFilter">
-      <div class="bubble">
+    <div class="countiesFilter" *ngIf="(propCounties$ | async) as propsCounties">
+      <div class="bubble" *ngIf="selectedCounty">
+        {{ selectedCounty | translateObjectProps: propsCounties }}
+      </div>
+      <div [class]="globalAsiaClass" (click)="activatedGlobe()">
         <i class="fas fa-globe-asia"></i>
       </div>
-      <div class="counties bubble" #selectCounty *ngFor="let county of stationInfo.counties">
-        {{ county | translateObjectProps: (propCounties$ | async) }}
+      <div class="counties bubble" (click)="activatedCounty(county)" *ngFor="let county of filteredCountyList">
+        {{ county | translateObjectProps: propsCounties }}
       </div>
     </div>
   </div>

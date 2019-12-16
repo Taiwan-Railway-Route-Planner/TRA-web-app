@@ -1,17 +1,18 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Station } from "../../class/station";
 import { TranslateService } from "@ngx-translate/core";
 import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
 import { FormControl } from "@angular/forms";
-import {combineLatest, of, fromEvent, Observable} from "rxjs";
+import { combineLatest, of, Observable } from "rxjs";
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
+import { County } from "../../class/county";
 
 @Component({
   selector: 'app-station-search',
   templateUrl: './station-search.component.html',
   styleUrls: ['./station-search.component.sass']
 })
-export class StationSearchComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StationSearchComponent implements OnInit, OnDestroy {
 
   @Input() placeholderLabel: string;
   @Input() stationInfo: any;
@@ -22,11 +23,15 @@ export class StationSearchComponent implements OnInit, AfterViewInit, OnDestroy 
   filterStation$ = this.filterStation.valueChanges.pipe(startWith(''));
 
   selectedStation: Station;
+  selectedCounty: County;
   propStation$: Observable<string>;
   propCounties$: Observable<string>;
+  filteredStationList: Station[];
   stationList$: Observable<Station>;
-  valueTest: string = 'te';
-
+  stationList: Station[];
+  countyList: County[];
+  filteredCountyList: County[];
+  globalAsiaClass : string = 'bubble';
 
   constructor(
     private translateService: TranslateService,
@@ -34,6 +39,11 @@ export class StationSearchComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   ngOnInit() {
+    this.countyList = this.stationInfo.counties;
+    this.filteredCountyList = this.countyList;
+    this.stationList = this.stationInfo.station;
+    this.filteredStationList = this.stationList;
+
     this.propCounties$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
@@ -61,26 +71,32 @@ export class StationSearchComponent implements OnInit, AfterViewInit, OnDestroy 
       this.updateStationMessage(stationNameProp)
     });
 
-    this.stationList$ = combineLatest(of(this.stationInfo.stations), this.filterStation$).pipe(
+    this.stationList$ = combineLatest(of(this.filteredStationList), this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
       map(function ([stationList, searchTerm]) {
         return stationList.filter(
           station =>
             station['eng站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-            ||
+              ||
             station['站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-            ||
+              ||
             station['traWebsiteCode'].indexOf(searchTerm) !== -1
         )
-      }),
+      })
     );
   }
 
-  ngAfterViewInit(): void {
-    // let selectedCounty$ = fromEvent(this.selectCounty.nativeElement, 'click').pipe(
-    //   tap(x => console.log(x))
-    // ).subscribe(x => console.log(x))
+  activatedCounty(county: County): void {
+    this.filteredCountyList = this.countyList.filter(cy => cy.eng縣市 !== county.eng縣市);
+    this.selectedCounty = county;
+    this.globalAsiaClass = 'counties bubble';
+  }
+
+  activatedGlobe() {
+    this.filteredCountyList = this.countyList;
+    this.selectedCounty = undefined;
+    this.globalAsiaClass = 'bubble';
   }
 
   saveValues() {
