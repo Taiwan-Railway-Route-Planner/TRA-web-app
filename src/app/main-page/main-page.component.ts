@@ -105,7 +105,7 @@ export class MainPageComponent implements OnInit {
 
   buildTheInformationForTheTrainRecords(): TimeDetails {
     const date = moment(this.date).locale('en').format('YYYYMMDD');
-    const time = (this.timeStamp)
+    const time = (this.timeStamp);
     return {date, time};
   }
 
