@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from "rxjs";
-import { Station } from "../class/station";
-import { TimeDetails } from "../class/timeDetails";
-import { County } from "../class/county";
+import { ReplaySubject } from 'rxjs';
+import { Station } from '../class/station';
+import { TimeDetails } from '../class/timeDetails';
+import { County } from '../class/county';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class StateStationService {
   public timeDetails = this.timeDetails$.asObservable();
 
 
-  public updateStationInfoService(stationInfo: any): void{
+  public updateStationInfoService(stationInfo: any): void {
     this.stationInfo$.next(stationInfo);
   }
 

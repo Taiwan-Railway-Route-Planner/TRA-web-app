@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Station } from "../../class/station";
-import { TranslateService } from "@ngx-translate/core";
-import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from "rxjs/operators";
-import { FormControl } from "@angular/forms";
-import { combineLatest, Observable, ReplaySubject } from "rxjs";
+import { Station } from '../../class/station';
+import { TranslateService } from '@ngx-translate/core';
+import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
-import { County } from "../../class/county";
+import { County } from '../../class/county';
 
 @Component({
   selector: 'app-station-search',
@@ -31,7 +31,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
   stationList: Station[];
   countyList: County[];
   filteredCountyList: County[];
-  globalAsiaClass : string = 'bubble';
+  globalAsiaClass = 'bubble';
 
   constructor(
     private translateService: TranslateService,
@@ -48,9 +48,9 @@ export class StationSearchComponent implements OnInit, OnDestroy {
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
         if (langChangeEvent.lang !== 'zh-TW') {
-          return 'eng縣市'
+          return 'eng縣市';
         } else {
-          return '縣市'
+          return '縣市';
         }
       })
     );
@@ -59,30 +59,30 @@ export class StationSearchComponent implements OnInit, OnDestroy {
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
         if (langChangeEvent.lang !== 'zh-TW') {
-          return 'eng站名'
+          return 'eng站名';
         } else {
-          return '站名'
+          return '站名';
         }
       }),
       shareReplay(1),
     );
 
     this.propStation$.subscribe(stationNameProp => {
-      this.updateStationMessage(stationNameProp)
+      this.updateStationMessage(stationNameProp);
     });
 
     this.stationList$ = combineLatest(this.filteredStationList, this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(function ([stationList, searchTerm]) {
+      map(function([stationList, searchTerm]) {
         return stationList.filter(
           station =>
-            station['eng站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            station.eng站名.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
               ||
-            station['站名'].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+            station.站名.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
               ||
-            station['traWebsiteCode'].indexOf(searchTerm) !== -1
-        )
+            station.traWebsiteCode.indexOf(searchTerm) !== -1
+        );
       })
     );
   }
@@ -111,11 +111,11 @@ export class StationSearchComponent implements OnInit, OnDestroy {
     this.propStation$.subscribe(
       stationPropName => this.updateStationMessage(stationPropName),
       take(1)
-    )
+    );
   }
 
-  updateStationMessage(stationNameProp: string ='') : void {
-    let stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp, 'traWebsiteCode');
+  updateStationMessage(stationNameProp: string = ''): void {
+    const stationMessage = this.translateObjectPropsPipe.transform(this.selectedStation, stationNameProp, 'traWebsiteCode');
     this.filterStation.setValue(stationMessage);
   }
 

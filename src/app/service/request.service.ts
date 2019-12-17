@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from "rxjs";
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -8,16 +8,16 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class RequestService {
 
-  HOME_IP: string = "taiwan-railway-route-planner.github.io";
-  BASE_URL: string = "https://" + this.HOME_IP + "/TRATimetableData/";
+  HOME_IP = 'taiwan-railway-route-planner.github.io';
+  BASE_URL: string = 'https://' + this.HOME_IP + '/TRATimetableData/';
 
-  EXTERNAL_IP: string = "taiwanrailwayapp.com";
-  BACKEND: string = "https://www." + this.EXTERNAL_IP + "/api/";
+  EXTERNAL_IP = 'taiwanrailwayapp.com';
+  BACKEND: string = 'https://www.' + this.EXTERNAL_IP + '/api/';
 
   url = {
-    station: this.BASE_URL + "stationInfo.json",
-    easyToSearchStationInfo: this.BASE_URL + "easyToSearchStationInfo.json",
-    schedulesDay: this.BACKEND + "route"
+    station: this.BASE_URL + 'stationInfo.json',
+    easyToSearchStationInfo: this.BASE_URL + 'easyToSearchStationInfo.json',
+    schedulesDay: this.BACKEND + 'route'
   };
 
   httpOptions = {
@@ -38,7 +38,7 @@ export class RequestService {
   }
 
   getTheRoute(travel: any): Observable<any> {
-    return this.postRequest(this.url.schedulesDay, travel, 'getTheRoute')
+    return this.postRequest(this.url.schedulesDay, travel, 'getTheRoute');
   }
 
   /**
@@ -46,7 +46,7 @@ export class RequestService {
    * @param url - url of the http request
    * @param funcName - name of the function
    */
-  private getRequest(url: string, funcName: string): Observable<any>{
+  private getRequest(url: string, funcName: string): Observable<any> {
     return this.http.get<any>(url)
       .pipe(
         catchError(this.handleError<any>(funcName))
@@ -59,7 +59,7 @@ export class RequestService {
    * @param funcName - name of the function
    * @param travel - the travel object
    */
-  private postRequest(url: string, funcName: string, travel: any): Observable<any>{
+  private postRequest(url: string, funcName: string, travel: any): Observable<any> {
     return this.http.put(url, travel, this.httpOptions)
       .pipe(
         catchError(this.handleError<any>(funcName))
@@ -72,7 +72,7 @@ export class RequestService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

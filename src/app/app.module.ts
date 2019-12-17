@@ -12,10 +12,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
+// @ts-ignore
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { MaterialModule } from './materialDesign';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+// @ts-ignore
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
 

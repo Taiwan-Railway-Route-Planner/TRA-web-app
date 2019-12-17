@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
 
-  title: string = "Taiwan Railway app";
+  title = 'Taiwan Railway app';
 
   form = new FormGroup({});
   model: any = {};

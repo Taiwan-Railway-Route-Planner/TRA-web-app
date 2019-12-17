@@ -6,11 +6,17 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
+// @ts-ignore
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+// @ts-ignore
 import {MatBadgeModule} from '@angular/material/badge';
+// @ts-ignore
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+// @ts-ignore
 import {MatButtonModule} from '@angular/material/button';
+// @ts-ignore
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+// @ts-ignore
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
