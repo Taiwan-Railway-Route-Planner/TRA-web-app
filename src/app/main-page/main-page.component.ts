@@ -94,12 +94,18 @@ export class MainPageComponent implements OnInit {
   }
 
   confirm() {
-
+    const dateInfo = this.buildTheInformationForTheTrainRecords();
+    const postObject = {
+      arrival: { details: this.arrivalStation },
+      departure: { details: this.departureStation },
+      time: {date: {show: '', real: dateInfo.date}, time: dateInfo.time}
+    };
+    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(x => console.log(x));
   }
 
   buildTheInformationForTheTrainRecords(): TimeDetails {
     const date = moment(this.date).locale('en').format('YYYYMMDD');
-    const time = moment(this.timeStamp).format('HH:mm');
+    const time = (this.timeStamp)
     return {date, time};
   }
 
