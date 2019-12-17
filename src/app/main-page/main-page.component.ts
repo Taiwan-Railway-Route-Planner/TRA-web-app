@@ -44,6 +44,7 @@ export class MainPageComponent implements OnInit {
     private requestService: RequestService,
     private state: StateStationService,
     private translateService: TranslateService,
+    // tslint:disable-next-line:variable-name
     private _adapter: DateAdapter<any>
   ) { }
 
@@ -67,15 +68,15 @@ export class MainPageComponent implements OnInit {
 
     this.stationInfo$ = this.state.stationInfo;
 
+    // tslint:disable-next-line:variable-name
     const _self = this;
 
     combineLatest(this.state.departureStation, this.state.arrivalStation)
-    .subscribe(function([departure, arrival]) {
+    .subscribe( ([departure, arrival]) =>  {
       _self.showSearchDetails = false;
       _self.arrivalStation = arrival;
       _self.departureStation = departure;
     });
-
   }
 
   openStationList(departureOrArrivalStation: boolean): void {
