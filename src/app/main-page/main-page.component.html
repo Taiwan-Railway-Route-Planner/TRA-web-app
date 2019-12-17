@@ -46,7 +46,7 @@
 
 
     <mat-card-actions>
-      <button color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>
+      <button (click)="confirm()" color="primary" mat-raised-button>{{ 'select.routeDetails.button' | translate }}</button>
       <button (click)="discard()" color="primary" mat-raised-button>{{ 'select.routeDetails.time.modal.bottom.leftBtn' | translate }}</button>
     </mat-card-actions>
   </mat-card>
