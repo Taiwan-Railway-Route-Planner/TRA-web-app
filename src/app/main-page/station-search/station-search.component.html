@@ -1,35 +1,36 @@
-<!--<div class="container">-->
-<!--  <div class="stationSearch">-->
-<!--    <span>-->
-<!--      <i class="fas fa-search first"></i>-->
-<!--      <mat-form-field class="search-text">-->
-<!--        <input type="string" [formControl]="filterStation" matInput [placeholder]="placeholderLabel | translate" autofocus>-->
-<!--      </mat-form-field>-->
-<!--      <i class="far fa-times-circle" (click)="discard()"></i>-->
+<div class="container">
+  <div class="stationSearch">
+    <span>
+      <i class="fas fa-search first"></i>
+      <nz-input-group class="search-text">
+        <input type="string" [formControl]="filterStation" nz-input [placeholder]="placeholderLabel | translate" autofocus>
+      </nz-input-group>
+      <i class="far fa-times-circle" (click)="discard()"></i>
 <!--      <button class="button" [matTooltip]="'select.routeDetails.time.modal.bottom.rightBtn' | translate" matTooltipPosition="left" (click)="saveValues()">-->
-<!--        <i class="fas fa-arrow-right second"></i>-->
-<!--      </button>-->
-<!--    </span>-->
-<!--  </div>-->
+      <button class="button" (click)="saveValues()">
+        <i class="fas fa-arrow-right second"></i>
+      </button>
+    </span>
+  </div>
 
-<!--  <div class="scroll-class">-->
-<!--    <div class="countiesFilter" *ngIf="(propCounties$ | async) as propsCounties">-->
-<!--      <div class="bubble" *ngIf="selectedCounty">-->
-<!--        {{ selectedCounty | translateObjectProps: propsCounties }}-->
-<!--      </div>-->
-<!--      <div [class]="globalAsiaClass" (click)="activatedGlobe()">-->
-<!--        <i class="fas fa-globe-asia"></i>-->
-<!--      </div>-->
-<!--      <div class="counties bubble" (click)="activatedCounty(county)" *ngFor="let county of filteredCountyList">-->
-<!--        {{ county | translateObjectProps: propsCounties }}-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="scroll-class">
+    <div class="countiesFilter" *ngIf="(propCounties$ | async) as propsCounties">
+      <div class="bubble" *ngIf="selectedCounty">
+        {{ selectedCounty | translateObjectProps: propsCounties }}
+      </div>
+      <div [class]="globalAsiaClass" (click)="activatedGlobe()">
+        <i class="fas fa-globe-asia"></i>
+      </div>
+      <div class="counties bubble" (click)="activatedCounty(county)" *ngFor="let county of filteredCountyList">
+        {{ county | translateObjectProps: propsCounties }}
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="listOfStations" *ngIf="(propStation$ | async) as propStation">-->
-<!--    <p *ngFor="let station of (stationList$ | async)" (click)="selectThisStation(station)">-->
-<!--      {{ (station | translateObjectProps: propStation: 'traWebsiteCode') }}-->
-<!--    </p>-->
-<!--  </div>-->
+  <div class="listOfStations" *ngIf="(propStation$ | async) as propStation">
+    <p *ngFor="let station of (stationList$ | async)" (click)="selectThisStation(station)">
+      {{ (station | translateObjectProps: propStation: 'traWebsiteCode') }}
+    </p>
+  </div>
 
-<!--</div>-->
+</div>
