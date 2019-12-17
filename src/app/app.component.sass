@@ -1,31 +1,17 @@
 /* AppComponent's private CSS styles */
-.toolbar-title
-  font-size: 2.5vh
+$primary-color: #1a0dab
+$white: #ffffff
 
-.smaller-i18n-form
-  width: 30%
-  font-size: 2vh
-
-.mat-toolbar-multiple-row
-  min-height: 7% !important
-
-h1
-  font-size: 1.2em
-  margin-bottom: 0
-
-h2
-  font-size: 2em
-  margin-top: 0
-  padding-top: 0
-
-a:visited, a:link
-  color: #334953
-
-
-button
-  margin-left: 1%
-
-
-.example-spacer
-  flex: 1 1 auto
-
+.header
+  background-color: $primary-color
+  color: $white
+  ::ng-deep
+    .ant-page-header-heading
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+    .ant-page-header-heading-title
+      color: $white
+    .ant-form-item
+     margin-bottom: 0
