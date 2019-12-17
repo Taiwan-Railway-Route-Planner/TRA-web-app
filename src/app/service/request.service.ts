@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +59,8 @@ export class RequestService {
    * @param funcName - name of the function
    * @param travel - the travel object
    */
-  private postRequest(url: string, funcName: string, travel: any): Observable<any> {
-    return this.http.put(url, travel, this.httpOptions)
+  private postRequest(url: string, travel: any, funcName: string): Observable<any> {
+    return this.http.post(url, travel, this.httpOptions)
       .pipe(
         catchError(this.handleError<any>(funcName))
       );
