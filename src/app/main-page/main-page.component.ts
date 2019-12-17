@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../service/request.service';
-import { StateStationService } from "../service/stateStation.service";
+import { StateStationService } from '../service/stateStation.service';
 import { Station } from '../class/station';
 import { FormControl } from '@angular/forms';
-// import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
-// import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { en_GB, zh_TW, ko_KR, de_DE, es_ES, fr_FR, nl_BE, ru_RU,  NzI18nService } from 'ng-zorro-antd/i18n';
 import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
-import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-import { TimeDetails} from "../class/timeDetails";
-import { map, startWith } from "rxjs/operators";
-import { combineLatest } from "rxjs";
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { TimeDetails} from '../class/timeDetails';
+import { map, startWith } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 const moment = _rollupMoment || _moment;
 
@@ -36,7 +35,7 @@ export class MainPageComponent implements OnInit {
   departureStation: Station;
   arrivalStation: Station;
   departureOrArrivalStation: boolean;
-  showSearchDetails: boolean = false;
+  showSearchDetails = false;
   prop$;
   stationInfo$;
 
@@ -57,20 +56,22 @@ export class MainPageComponent implements OnInit {
     this.prop$ = this.translateService.onLangChange.pipe(
       startWith({lang: this.translateService.currentLang}),
       map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW'){
-          return 'eng站名'
+        if (langChangeEvent.lang !== 'zh-TW') {
+          return 'eng站名';
         } else {
-          return '站名'
+          return '站名';
         }
       }),
     );
 
     this.stationInfo$ = this.state.stationInfo;
 
-    let _self = this;
+    // tslint:disable-next-line:variable-name
+    const _self = this;
 
     combineLatest(this.state.departureStation, this.state.arrivalStation)
-    .subscribe(function ([departure, arrival]) {
+      // tslint:disable-next-line:only-arrow-functions
+    .subscribe(function([departure, arrival]) {
       _self.showSearchDetails = false;
       _self.arrivalStation = arrival;
       _self.departureStation = departure;
@@ -78,7 +79,7 @@ export class MainPageComponent implements OnInit {
 
   }
 
-  openStationList(departureOrArrivalStation: boolean): void{
+  openStationList(departureOrArrivalStation: boolean): void {
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
   }
@@ -92,13 +93,13 @@ export class MainPageComponent implements OnInit {
     this.departureStation = undefined;
   }
 
-  confirm(){
+  confirm() {
 
   }
 
-  buildTheInformationForTheTrainRecords() : TimeDetails {
-    let date = moment(this.date).locale('en').format('YYYYMMDD');
-    let time = moment(this.timeStamp).format('HH:mm');
+  buildTheInformationForTheTrainRecords(): TimeDetails {
+    const date = moment(this.date).locale('en').format('YYYYMMDD');
+    const time = moment(this.timeStamp).format('HH:mm');
     return {date, time};
   }
 
