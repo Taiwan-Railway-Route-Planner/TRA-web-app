@@ -74,7 +74,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
     this.stationList$ = combineLatest(this.filteredStationList, this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(function([stationList, searchTerm]) {
+      map(([stationList, searchTerm]) => {
         return stationList.filter(
           station =>
             station.eng站名.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
