@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Station } from '../../class/station';
 import { TranslateService } from '@ngx-translate/core';
-import {debounceTime, distinctUntilChanged, map, shareReplay, startWith, take, tap} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, shareReplay, startWith, take } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
@@ -15,7 +15,8 @@ import { County } from '../../class/county';
 export class StationSearchComponent implements OnInit, OnDestroy {
 
   @Input() placeholderLabel: string;
-  @Input() stationInfo: any;
+  @Input() stationInfoList: any;
+  @Input() countyInfoList: any;
   @Output() stationSelect = new EventEmitter<Station>();
   @Output() stopEvent = new EventEmitter();
 
@@ -39,9 +40,9 @@ export class StationSearchComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.countyList = this.stationInfo.counties;
+    this.countyList = this.countyInfoList;
     this.filteredCountyList = this.countyList;
-    this.stationList = this.stationInfo.stations;
+    this.stationList = this.stationInfoList;
     this.filteredStationList.next(this.stationList);
 
     this.propCounties$ = this.translateService.onLangChange.pipe(
@@ -74,7 +75,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
     this.stationList$ = combineLatest(this.filteredStationList, this.filterStation$).pipe(
       debounceTime(200),
       distinctUntilChanged(),
-      map(function([stationList, searchTerm]) {
+      map(([stationList, searchTerm]) => {
         return stationList.filter(
           station =>
             station.eng站名.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1

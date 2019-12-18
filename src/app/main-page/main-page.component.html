@@ -1,9 +1,13 @@
 <div class="travelDetails">
   <ng-container *ngIf="showSearchDetails">
-    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation" [stationInfo]="stationInfo$ | async"
+    <app-station-search *ngIf="departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.startStation"
+                        [stationInfoList]="stationInfoListFiltered$ | async"
+                        [countyInfoList]="countyInfoList$ | async"
                         (stationSelect)="saveDepartureStation($event)"
                         class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
-    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation" [stationInfo]="stationInfo$ | async"
+    <app-station-search *ngIf="!departureOrArrivalStation" placeholderLabel="select.searchBar.hintText.endStation"
+                        [stationInfoList]="stationInfoListFiltered$ | async"
+                        [countyInfoList]="countyInfoList$ | async"
                         (stationSelect)="saveArrivalStation($event)"
                         class="stationSearchContainer" (stopEvent)="stopSearching()"></app-station-search>
   </ng-container>
