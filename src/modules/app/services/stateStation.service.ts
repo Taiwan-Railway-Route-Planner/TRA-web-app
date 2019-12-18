@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { Station } from '../class/station';
-import { TimeDetails } from '../class/timeDetails';
-import { County } from '../class/county';
+import { Station, TimeDetails } from '../class';
 
 @Injectable({
   providedIn: 'root'
