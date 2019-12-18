@@ -1,10 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { StationSearchComponent } from './main-page/station-search/station-search.component';
-import { TrainOverviewComponent } from './train-overview/train-overview.component';
 
 // import ngx-translate and the http loader
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -21,14 +16,13 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { StationSearchComponent } from './main-page/station-search/station-search.component';
+import { TrainOverviewComponent } from './train-overview/train-overview.component';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainPageComponent,
-    StationSearchComponent,
-    TrainOverviewComponent,
-    TranslateObjectPropsPipe,
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,6 +43,13 @@ import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
     }),
     FormsModule,
     NgxMaterialTimepickerModule
+  ],
+  declarations: [
+    AppComponent,
+    MainPageComponent,
+    StationSearchComponent,
+    TrainOverviewComponent,
+    TranslateObjectPropsPipe,
   ],
   providers: [
     TranslateObjectPropsPipe,
