@@ -11,7 +11,8 @@ import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { TimeDetails} from '../class/timeDetails';
 import { map, startWith } from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
+import { County } from '../class/county';
 
 const moment = _rollupMoment || _moment;
 
@@ -38,7 +39,9 @@ export class MainPageComponent implements OnInit {
   departureOrArrivalStation: boolean;
   showSearchDetails = false;
   prop$;
-  stationInfo$;
+  stationInfoList$: Observable<Station>;
+  stationInfoListFiltered$: Observable<Station>;
+  countyInfoList$: Observable<County>;
 
   constructor(
     private requestService: RequestService,
@@ -66,7 +69,13 @@ export class MainPageComponent implements OnInit {
       }),
     );
 
-    this.stationInfo$ = this.state.stationInfo;
+    this.stationInfoList$ = this.state.stationInfo.pipe(
+      map(stationInfoList => stationInfoList.stations)
+    );
+    this.countyInfoList$ = this.state.stationInfo.pipe(
+      map(stationInfoList => stationInfoList.counties)
+    );
+    this.stationInfoListFiltered$ = this.stationInfoList$;
 
     // tslint:disable-next-line:variable-name
     const _self = this;
@@ -82,6 +91,11 @@ export class MainPageComponent implements OnInit {
   openStationList(departureOrArrivalStation: boolean): void {
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
+    if (this.departureOrArrivalStation && this.arrivalStation) {
+      this.filterStationOutOfFilteredStationList(this.state.arrivalStation);
+    } else if (!this.departureOrArrivalStation && this.departureStation) {
+      this.filterStationOutOfFilteredStationList(this.state.departureStation);
+    }
   }
 
   stopSearching() {
@@ -112,6 +126,19 @@ export class MainPageComponent implements OnInit {
   saveDepartureStation(station: Station) {
     this.state.updateDepartureStation(station);
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
+    this.filterStationOutOfFilteredStationList(this.state.departureStation);
+  }
+
+  filterStationOutOfFilteredStationList(station: Observable<Station>): void {
+    this.stationInfoListFiltered$ = combineLatest(this.stationInfoList$, station).pipe(
+      map(([stationList, departureStation]) => {
+        // @ts-ignore
+        return stationList.filter(
+          // tslint:disable-next-line:no-shadowed-variable
+          station => station.站名 !== departureStation.站名
+        );
+      }),
+    );
   }
 
   saveArrivalStation(station: Station) {
