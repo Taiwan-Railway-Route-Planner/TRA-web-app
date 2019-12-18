@@ -1,6 +1,6 @@
 export class Station {
   '時刻表編號': number;
-  "traWebsiteCode": string;
+  'traWebsiteCode': string;
   '站名': string;
   'eng站名': string;
   'routeCode': number[];
