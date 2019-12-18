@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Station } from '../../class/station';
+import { County, Station } from '../../class/';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, map, shareReplay, startWith, take } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
-import { County } from '../../class/county';
 
 @Component({
   selector: 'app-station-search',

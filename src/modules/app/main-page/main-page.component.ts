@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../service/request.service';
-import { StateStationService } from '../service/stateStation.service';
-import { Station } from '../class/station';
-import { County } from '../class/county';
+import { RequestService } from '../services/request.service';
+import { StateStationService } from '../services/stateStation.service';
+import { Station, County } from '../class';
 import { FormControl } from '@angular/forms';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -10,7 +9,6 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { TimeDetails} from '../class/timeDetails';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
