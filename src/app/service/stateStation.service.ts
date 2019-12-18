@@ -21,6 +21,8 @@ export class StateStationService {
   private timeDetails$ = new ReplaySubject<TimeDetails>();
   public timeDetails = this.timeDetails$.asObservable();
 
+  private travelDetails$ = new ReplaySubject();
+  public travelDetails = this.travelDetails$.asObservable();
 
   public updateStationInfoService(stationInfo: any): void {
     this.stationInfo$.next(stationInfo);
@@ -37,4 +39,9 @@ export class StateStationService {
   public updateTimeDetails(timeDetails: TimeDetails): void {
     this.timeDetails$.next(timeDetails);
   }
+
+  public updateTravelDetails(): void {
+    this.travelDetails$.next();
+  }
+
 }
