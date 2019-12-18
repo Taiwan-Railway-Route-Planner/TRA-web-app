@@ -12,6 +12,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { TimeDetails} from '../class/timeDetails';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { Router } from '@angular/router';
 
 const moment = _rollupMoment || _moment;
 
@@ -45,7 +46,8 @@ export class MainPageComponent implements OnInit {
     private state: StateStationService,
     private translateService: TranslateService,
     // tslint:disable-next-line:variable-name
-    private _adapter: DateAdapter<any>
+    private _adapter: DateAdapter<any>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -100,7 +102,12 @@ export class MainPageComponent implements OnInit {
       departure: { details: this.departureStation },
       time: {date: {show: '', real: dateInfo.date}, time: dateInfo.time}
     };
-    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(x => this.state.updateTravelDetails(x));
+    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(
+      x => {
+        this.state.updateTravelDetails(x.data.data);
+        this.router.navigate(['/train', x.data.multi]);
+      }
+    );
   }
 
   buildTheInformationForTheTrainRecords() {
