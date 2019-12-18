@@ -100,12 +100,13 @@ export class MainPageComponent implements OnInit {
       departure: { details: this.departureStation },
       time: {date: {show: '', real: dateInfo.date}, time: dateInfo.time}
     };
-    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(x => console.log(x));
+    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(x => this.state.updateTravelDetails(x));
   }
 
-  buildTheInformationForTheTrainRecords(): TimeDetails {
+  buildTheInformationForTheTrainRecords() {
     const date = moment(this.date).locale('en').format('YYYYMMDD');
     const time = (this.timeStamp);
+    this.state.updateTimeDetails({date, time});
     return {date, time};
   }
 
