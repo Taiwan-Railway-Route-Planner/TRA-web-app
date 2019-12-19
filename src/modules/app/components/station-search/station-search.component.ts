@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { County, Station } from '../../class/';
+import { County, Station } from '../../class';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, map, shareReplay, startWith, take } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
