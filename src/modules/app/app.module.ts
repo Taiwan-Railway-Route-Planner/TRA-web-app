@@ -17,10 +17,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { StationSearchComponent } from './main-page/station-search/station-search.component';
-import { TrainOverviewComponent } from './train-overview/train-overview.component';
+import { AppComponent, MainPageComponent, TrainOverviewComponent  } from './containers';
+import { StationSearchComponent } from './components';
 
 @NgModule({
   imports: [
