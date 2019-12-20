@@ -22,7 +22,7 @@ export class RequestService {
     return this.getRequest(Url.easyToSearchStationInfo, 'getSearchFileWithStations');
   }
 
-  getStation(): Observable<any> {
+  getInfoList(): Observable<any> {
     return this.getRequest(Url.station, 'getStation');
   }
 
