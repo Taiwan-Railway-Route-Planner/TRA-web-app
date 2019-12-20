@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { TranslateObjectPropsPipe } from './pipe/translate-object-props.pipe';
+import { AppSandbox } from './app.sandbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, MainPageComponent, TrainOverviewComponent  } from './containers';
@@ -51,6 +52,7 @@ import { StationSearchComponent } from './components';
   ],
   providers: [
     TranslateObjectPropsPipe,
+    AppSandbox
   ],
   bootstrap: [AppComponent]
 })
