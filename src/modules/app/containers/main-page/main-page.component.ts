@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../../services/request.service';
-import { StateStationService } from '../../services/stateStation.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { AppSandbox } from '../../app.sandbox';
 import { Station, County } from '../../types';
 import { FormControl } from '@angular/forms';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -28,7 +27,7 @@ const moment = _rollupMoment || _moment;
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit, OnDestroy {
 
   date = new FormControl(moment());
   timeStamp = moment().format('LT');
@@ -38,13 +37,13 @@ export class MainPageComponent implements OnInit {
   departureOrArrivalStation: boolean;
   showSearchDetails = false;
   prop$;
-  stationInfoList$: Observable<Station>;
-  stationInfoListFiltered$: Observable<Station>;
-  countyInfoList$: Observable<County>;
+  stationInfoList$: Observable<Station[]>;
+  stationInfoListFiltered$: Observable<Station[]>;
+  countyInfoList$: Observable<County[]>;
+  private callData: any;
 
   constructor(
-    private requestService: RequestService,
-    private state: StateStationService,
+    private sb: AppSandbox,
     private translateService: TranslateService,
     // tslint:disable-next-line:variable-name
     private _adapter: DateAdapter<any>,
@@ -52,7 +51,7 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.requestService.getStation().subscribe(stationInfo => this.state.updateStationInfoService(stationInfo));
+    this.callData = this.sb.loadInfoData().subscribe();
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this._adapter.setLocale(event.lang);
@@ -69,18 +68,14 @@ export class MainPageComponent implements OnInit {
       }),
     );
 
-    this.stationInfoList$ = this.state.stationInfo.pipe(
-      map(stationInfoList => stationInfoList.stations)
-    );
-    this.countyInfoList$ = this.state.stationInfo.pipe(
-      map(stationInfoList => stationInfoList.counties)
-    );
+    this.stationInfoList$ = this.sb.stationList;
+    this.countyInfoList$ = this.sb.countyList;
     this.stationInfoListFiltered$ = this.stationInfoList$;
 
     // tslint:disable-next-line:variable-name
     const _self = this;
 
-    combineLatest(this.state.departureStation, this.state.arrivalStation)
+    combineLatest(this.sb.departureStation, this.sb.arrivalStation)
     .subscribe( ([departure, arrival]) =>  {
       _self.showSearchDetails = false;
       _self.arrivalStation = arrival;
@@ -92,9 +87,9 @@ export class MainPageComponent implements OnInit {
     this.departureOrArrivalStation = departureOrArrivalStation;
     this.showSearchDetails = true;
     if (this.departureOrArrivalStation && this.arrivalStation) {
-      this.filterStationOutOfFilteredStationList(this.state.arrivalStation);
+      this.filterStationOutOfFilteredStationList(this.sb.arrivalStation);
     } else if (!this.departureOrArrivalStation && this.departureStation) {
-      this.filterStationOutOfFilteredStationList(this.state.departureStation);
+      this.filterStationOutOfFilteredStationList(this.sb.departureStation);
     }
   }
 
@@ -114,9 +109,8 @@ export class MainPageComponent implements OnInit {
       departure: { details: this.departureStation },
       time: {date: {show: '', real: dateInfo.date}, time: dateInfo.time}
     };
-    this.requestService.getTheRoute(JSON.stringify(postObject)).subscribe(
+    this.sb.getARoute(postObject).subscribe(
       x => {
-        this.state.updateTravelDetails(x.data.data);
         this.router.navigate(['/train', x.data.multi]);
       }
     );
@@ -124,15 +118,14 @@ export class MainPageComponent implements OnInit {
 
   buildTheInformationForTheTrainRecords() {
     const date = moment(this.date).locale('en').format('YYYYMMDD');
-    const time = (this.timeStamp);
-    this.state.updateTimeDetails({date, time});
+    const time = moment(this.timeStamp, 'h:mm').format('HH:mm');
     return {date, time};
   }
 
   saveDepartureStation(station: Station) {
-    this.state.updateDepartureStation(station);
+    this.sb.updateDepartureStation(station);
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
-    this.filterStationOutOfFilteredStationList(this.state.departureStation);
+    this.filterStationOutOfFilteredStationList(this.sb.departureStation);
   }
 
   filterStationOutOfFilteredStationList(station: Observable<Station>): void {
@@ -148,7 +141,11 @@ export class MainPageComponent implements OnInit {
   }
 
   saveArrivalStation(station: Station) {
-    this.state.updateArrivalStation(station);
+    this.sb.updateArrivalStation(station);
     this.departureOrArrivalStation = !this.departureOrArrivalStation;
+  }
+
+  ngOnDestroy(): void {
+    this.callData.unsubscribe();
   }
 }
