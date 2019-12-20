@@ -55,5 +55,4 @@ export class StateService {
   public updateLanguage(language: string): void {
     this.languageSetting$.next(language);
   }
-
 }

@@ -41,6 +41,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   stationInfoListFiltered$: Observable<Station[]>;
   countyInfoList$: Observable<County[]>;
   private callData: any;
+  private languageLoading: any;
 
   constructor(
     private sb: AppSandbox,
@@ -53,7 +54,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.callData = this.sb.loadInfoData().subscribe();
 
-    this.sb.languageSetting.subscribe((language) => this._adapter.setLocale(language));
+    this.languageLoading = this.sb.languageSetting.subscribe((language) => this._adapter.setLocale(language));
 
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
       this.sb.updateLanguage(event.lang);
@@ -148,5 +149,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.callData.unsubscribe();
+    this.languageLoading.unsubscribe();
   }
 }
