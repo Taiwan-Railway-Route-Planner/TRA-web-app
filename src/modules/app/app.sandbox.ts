@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RequestService, StateService } from './services';
 import { Observable } from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {Station} from './types';
+import { tap } from 'rxjs/operators';
+import { Station } from './types';
 
 @Injectable()
 export class AppSandbox {
