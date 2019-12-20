@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { Station, TimeDetails } from '../types';
+import { County, Station, TimeDetails } from '../types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateStationService {
 
-  private stationInfo$ = new ReplaySubject<any>(1);
-  public stationInfo = this.stationInfo$.asObservable();
+  private stationList$ = new ReplaySubject<Station[]>(1);
+  public stationList = this.stationList$.asObservable();
+
+  private countyList$ = new ReplaySubject<County[]>(1);
+  public countyList = this.countyList$.asObservable();
 
   private departureStation$ = new ReplaySubject<Station>();
   public departureStation = this.departureStation$.asObservable();
@@ -22,8 +25,12 @@ export class StateStationService {
   private travelDetails$ = new ReplaySubject<any>();
   public travelDetails = this.travelDetails$.asObservable();
 
-  public updateStationInfoService(stationInfo: any): void {
-    this.stationInfo$.next(stationInfo);
+  public updateStationList(stationList: Station[]): void {
+    this.stationList$.next(stationList);
+  }
+
+  public updateCountyList(countyList: County[]): void {
+    this.countyList$.next(countyList);
   }
 
   public updateDepartureStation(station: Station): void {
