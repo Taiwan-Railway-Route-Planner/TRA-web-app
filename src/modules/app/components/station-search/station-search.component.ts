@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { County, Station } from '../../types';
-import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged, map, shareReplay, startWith, take } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { TranslateObjectPropsPipe } from '../../pipe/translate-object-props.pipe';
+import { AppSandbox } from '../../app.sandbox';
 
 @Component({
   selector: 'app-station-search',
@@ -34,7 +34,7 @@ export class StationSearchComponent implements OnInit, OnDestroy {
   globalAsiaClass = 'bubble';
 
   constructor(
-    private translateService: TranslateService,
+    private sb: AppSandbox,
     private translateObjectPropsPipe: TranslateObjectPropsPipe
   ) { }
 
@@ -44,10 +44,9 @@ export class StationSearchComponent implements OnInit, OnDestroy {
     this.stationList = this.stationInfoList;
     this.filteredStationList.next(this.stationList);
 
-    this.propCounties$ = this.translateService.onLangChange.pipe(
-      startWith({lang: this.translateService.currentLang}),
-      map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW') {
+    this.propCounties$ = this.sb.languageSetting.pipe(
+      map(language => {
+        if (language !== 'zh-TW') {
           return 'eng縣市';
         } else {
           return '縣市';
@@ -55,10 +54,9 @@ export class StationSearchComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.propStation$ = this.translateService.onLangChange.pipe(
-      startWith({lang: this.translateService.currentLang}),
-      map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW') {
+    this.propStation$ = this.sb.languageSetting.pipe(
+      map(language => {
+        if (language !== 'zh-TW') {
           return 'eng站名';
         } else {
           return '站名';
