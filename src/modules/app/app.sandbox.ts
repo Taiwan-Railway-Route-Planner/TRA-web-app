@@ -13,6 +13,7 @@ export class AppSandbox {
   arrivalStation = this.state.arrivalStation;
   timeDetails = this.state.timeDetails;
   travelDetails = this.state.travelDetails;
+  languageSetting = this.state.languageSetting;
 
   constructor(
     private request: RequestService,
@@ -43,6 +44,10 @@ export class AppSandbox {
 
   public updateArrivalStation(station: Station): void {
     this.state.updateArrivalStation(station);
+  }
+
+  public updateLanguage(language: string): void {
+    this.state.updateLanguage(language);
   }
 
 }
