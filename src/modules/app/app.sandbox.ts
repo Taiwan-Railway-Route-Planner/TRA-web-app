@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RequestService, StateStationService } from './services';
+import { RequestService, StateService } from './services';
 import { Observable } from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Station} from './types';
@@ -16,7 +16,7 @@ export class AppSandbox {
 
   constructor(
     private request: RequestService,
-    private state: StateStationService
+    private state: StateService
   ) {}
 
   public loadInfoData(): Observable<any[]> {

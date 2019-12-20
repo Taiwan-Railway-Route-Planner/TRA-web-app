@@ -5,7 +5,7 @@ import { County, Station, TimeDetails } from '../types';
 @Injectable({
   providedIn: 'root'
 })
-export class StateStationService {
+export class StateService {
 
   private stationList$ = new ReplaySubject<Station[]>(1);
   public stationList = this.stationList$.asObservable();
