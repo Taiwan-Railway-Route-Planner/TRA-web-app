@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { County, Station, TimeDetails } from '../types';
 
 @Injectable({
@@ -25,6 +25,9 @@ export class StateService {
   private travelDetails$ = new ReplaySubject<any>();
   public travelDetails = this.travelDetails$.asObservable();
 
+  public languageSetting$ = new BehaviorSubject<string>('en-gb');
+  public languageSetting = this.languageSetting$.asObservable();
+
   public updateStationList(stationList: Station[]): void {
     this.stationList$.next(stationList);
   }
@@ -47,6 +50,10 @@ export class StateService {
 
   public updateTravelDetails(travelDetails: any): void {
     this.travelDetails$.next(travelDetails);
+  }
+
+  public updateLanguage(language: string): void {
+    this.languageSetting$.next(language);
   }
 
 }
