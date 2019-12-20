@@ -2,23 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Url } from '../app.settings';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
-
-  HOME_IP = 'taiwan-railway-route-planner.github.io';
-  BASE_URL: string = 'https://' + this.HOME_IP + '/TRATimetableData/';
-
-  EXTERNAL_IP = 'taiwanrailwayapp.com';
-  BACKEND: string = 'https://www.' + this.EXTERNAL_IP + '/api/';
-
-  url = {
-    station: this.BASE_URL + 'stationInfo.json',
-    easyToSearchStationInfo: this.BASE_URL + 'easyToSearchStationInfo.json',
-    schedulesDay: this.BACKEND + 'route'
-  };
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,15 +19,15 @@ export class RequestService {
   }
 
   getSearchFileWithStations(): Observable<any> {
-    return this.getRequest(this.url.easyToSearchStationInfo, 'getSearchFileWithStations');
+    return this.getRequest(Url.easyToSearchStationInfo, 'getSearchFileWithStations');
   }
 
   getStation(): Observable<any> {
-    return this.getRequest(this.url.station, 'getStation');
+    return this.getRequest(Url.station, 'getStation');
   }
 
   getTheRoute(travel: any): Observable<any> {
-    return this.postRequest(this.url.schedulesDay, travel, 'getTheRoute');
+    return this.postRequest(Url.schedulesDay, travel, 'getTheRoute');
   }
 
   /**
