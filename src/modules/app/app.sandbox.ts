@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { RequestService, StateStationService } from './services';
+import { RequestService, StateService } from './services';
 import { Observable } from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {Station} from './types';
+import { tap } from 'rxjs/operators';
+import { Station } from './types';
 
 @Injectable()
 export class AppSandbox {
@@ -13,10 +13,11 @@ export class AppSandbox {
   arrivalStation = this.state.arrivalStation;
   timeDetails = this.state.timeDetails;
   travelDetails = this.state.travelDetails;
+  languageSetting = this.state.languageSetting;
 
   constructor(
     private request: RequestService,
-    private state: StateStationService
+    private state: StateService
   ) {}
 
   public loadInfoData(): Observable<any[]> {
@@ -43,6 +44,10 @@ export class AppSandbox {
 
   public updateArrivalStation(station: Station): void {
     this.state.updateArrivalStation(station);
+  }
+
+  public updateLanguage(language: string): void {
+    this.state.updateLanguage(language);
   }
 
 }

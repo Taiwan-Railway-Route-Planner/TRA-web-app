@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppSandbox } from '../../app.sandbox';
 import { Station, County } from '../../types';
 import { FormControl } from '@angular/forms';
@@ -8,7 +8,7 @@ import * as _moment from 'moment';
 // @ts-ignore
 import { default as _rollupMoment } from 'moment';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { map, startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { combineLatest, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -53,19 +53,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.callData = this.sb.loadInfoData().subscribe();
 
+    this.sb.languageSetting.subscribe((language) => this._adapter.setLocale(language));
+
     this.translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      this._adapter.setLocale(event.lang);
+      this.sb.updateLanguage(event.lang);
     });
 
-    this.prop$ = this.translateService.onLangChange.pipe(
-      startWith({lang: this.translateService.currentLang}),
-      map(langChangeEvent => {
-        if (langChangeEvent.lang !== 'zh-TW') {
+    this.prop$ = this.sb.languageSetting.pipe(
+      map(language => {
+        if (language !== 'zh-TW') {
           return 'eng站名';
         } else {
           return '站名';
         }
-      }),
+      })
     );
 
     this.stationInfoList$ = this.sb.stationList;
